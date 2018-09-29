@@ -1,0 +1,451 @@
+{
+	"results": [{
+			"id" : "13.00",
+			"text" : "Media Books-13.00%"
+		},
+		{
+			"id" : "6.50",
+			"text" : "Movies-6.50%"
+		},
+		{
+			"id" : "8.00",
+			"text" : "Music-8.00%"
+		},
+		{
+			"id" : "7.00",
+			"text" : "Video Games-7.00%"
+		},
+		{
+			"id" : "7.00",
+			"text" : "Video Games - Consoles-7.00%"
+		},
+		{
+			"id" : "9.00",
+			"text" : "Video Games - Accessories-9.00%"
+		},
+		{
+			"id" : "10.00",
+			"text" : "Educational Software-10.00%"
+		},
+		{
+			"id" : "14.00",
+			"text" : "Non-Educational Software-14.00%"
+		},
+		{
+			"id" : "14.00",
+			"text" : "Consumables Pet Food (Dog Food)-14.00%"
+		},
+		{
+			"id" : "8.50",
+			"text" : "Pet Food (except Dog Food)-8.50%"
+		},
+		{
+			"id" : "10.00",
+			"text" : "Pet Accessories-10.00%"
+		},
+		{
+			"id" : "3.00",
+			"text" : "Beauty Products-3.00%"
+		},
+		{
+			"id" : "15.00",
+			"text" : "Beauty - Fragrance-15.00%"
+		},
+		{
+			"id" : "14.00",
+			"text" : "Luxury Beauty-14.00%"
+		},
+		{
+			"id" : "11.00",
+			"text" : "Health and Personal Care (HPC)-11.00%"
+		},
+		{
+			"id" : "11.00",
+			"text" : "HPC - Body Support-11.00%"
+		},
+		{
+			"id" : "6.50",
+			"text" : "HPC - Medical Equipment & Contact Lens-6.50%"
+		},
+		{
+			"id" : "9.00",
+			"text" : "HPC - Nutrition-9.00%"
+		},
+		{
+			"id" : "3.00",
+			"text" : "HPC - Household Supplies, Personal Care and Ayurveda-3.00%"
+		},
+		{
+			"id" : "9.50",
+			"text" : "Personal Care Appliances (Grooming and styling)-9.50%"
+		},
+		{
+			"id" : "7.00",
+			"text" : "Personal Care Appliances (excl. Grooming and styling)-7.00%"
+		},
+		{
+			"id" : "6.00",
+			"text" : "Baby Products-6.00%"
+		},
+		{
+			"id" : "7.00",
+			"text" : "Baby - Nursing & Feeding-7.00%"
+		},
+		{
+			"id" : "3.00",
+			"text" : "Grocery and Gourmet-3.00%"
+		},
+		{
+			"id" : "17.00",
+			"text" : "Softline Apparel-17.00%"
+		},
+		{
+			"id" : "15.50",
+			"text" : "Apparel Accessories-15.50%"
+		},
+		{
+			"id" : "10.50",
+			"text" : "Apparel - Innerwear-10.50%"
+		},
+		{
+			"id" : "13.00",
+			"text" : "Apparel - Sleepwear-13.00%"
+		},
+		{
+			"id" : "8.50",
+			"text" : "Eyewear-8.50%"
+		},
+		{
+			"id" : "11.00",
+			"text" : "Watches-11.00%"
+		},
+		{
+			"id" : "14.00",
+			"text" : "Shoes-14.00%"
+		},
+		{
+			"id" : "11.00",
+			"text" : "Handbags-11.00%"
+		},
+		{
+			"id" : "11.50",
+			"text" : "Wallets-11.50%"
+		},
+		{
+			"id" : "5.50",
+			"text" : "Backpacks-5.50%"
+		},
+		{
+			"id" : "5.50",
+			"text" : "Luggage (excluding Wallets and Backpacks)-5.50%"
+		},
+		{
+			"id" : "23.00",
+			"text" : "Fashion Jewellery-23.00%"
+		},
+		{
+			"id" : "8.00",
+			"text" : "Silver Jewellery-8.00%"
+		},
+		{
+			"id" : "8.00",
+			"text" : "Silver Coins and Bars-8.00%"
+		},
+		{
+			"id" : "5.00",
+			"text" : "Fine Jewellery (unstudded and solitaire)-5.00%"
+		},
+		{
+			"id" : "8.00",
+			"text" : "Fine Jewellery (studded)-8.00%"
+		},
+		{
+			"id" : "2.00",
+			"text" : "Fine Jewellery (Gold Coins)-2.00%"
+		},
+		{
+			"id" : "5.00",
+			"text" : "Other Hardline Kitchen - Non Appliances for <300-5.00%"
+		},
+		{
+			"id" : "11.50",
+			"text" : "Other Hardline Kitchen - Non Appliances for >300-11.50%"
+		},
+		{
+			"id" : "5.50",
+			"text" : "Small Appliances-5.50%"
+		},
+		{
+			"id" : "11.00",
+			"text" : "Home - Cushions & Covers-11.00%"
+		},
+		{
+			"id" : "12.00",
+			"text" : "Home - Bed & Bath Linen-12.00%"
+		},
+		{
+			"id" : "11.50",
+			"text" : "Home improvement accessroies-11.50%"
+		},
+		{
+			"id" : "8.00",
+			"text" : "Home improvement (excl. accessories)-8.00%"
+		},
+		{
+			"id" : "17.00",
+			"text" : "Home - Other Subcategories-17.00%"
+		},
+		{
+			"id" : "7.50",
+			"text" : "Craft Materials-7.50%"
+		},
+		{
+			"id" : "5.00",
+			"text" : "Lawn & Garden- Solar devices-5.00%"
+		},
+		{
+			"id" : "3.00",
+			"text" : "Lawn & Garden- Chemical pest control-3.00%"
+		},
+		{
+			"id" : "10.00",
+			"text" : "Lawn & Garden- Other subcategories-10.00%"
+		},
+		{
+			"id" : "11.50",
+			"text" : "Indoor Lighting (except LED bulbs and battens)-11.50%"
+		},
+		{
+			"id" : "3.00",
+			"text" : "LED Bulbs and Battens-3.00%"
+		},
+		{
+			"id" : "17.00",
+			"text" : "Clocks-17.00%"
+		},
+		{
+			"id" : "21.00",
+			"text" : "Automotive - Other Subcategories-21.00%"
+		},
+		{
+			"id" : "5.00",
+			"text" : "Automotive - Tyres and Rims-5.00%"
+		},
+		{
+			"id" : "6.50",
+			"text" : "Automotive - Lubricants, Car Parts and Helmets, Vehicle Care and Tools-6.50%"
+		},
+		{
+			"id" : "17.00",
+			"text" : "Automotive - Accessories-17.00%"
+		},
+		{
+			"id" : "13.00",
+			"text" : "Large Appliances Accessories-13.00%"
+		},
+		{
+			"id" : "6.50",
+			"text" : "Large Appliances – Chimneys-6.50%"
+		},
+		{
+			"id" : "4.50",
+			"text" : "Large Appliances (excl. Accessories and Chimneys)-4.50%"
+		},
+		{
+			"id" : "12.00",
+			"text" : "Furniture-12.00%"
+		},
+		{
+			"id" : "7.00",
+			"text" : "Bean Bags and Inflatables-7.00%"
+		},
+		{
+			"id" : "11.50",
+			"text" : "Business & Scientific Supplies-11.50%"
+		},
+		{
+			"id" : "8.00",
+			"text" : "Industrial Supplies-8.00%"
+		},
+		{
+			"id" : "6.00",
+			"text" : "Bicycles-6.00%"
+		},
+		{
+			"id" : "6.50",
+			"text" : "Gym Equipments-6.50%"
+		},
+		{
+			"id" : "12.50",
+			"text" : "Sports & Outdoors-12.50%"
+		},
+		{
+			"id" : "9.50",
+			"text" : "Toys-9.50%"
+		},
+		{
+			"id" : "7.00",
+			"text" : "Office Products-7.00%"
+		},
+		{
+			"id" : "7.50",
+			"text" : "Musical Instruments - Guitars-7.50%"
+		},
+		{
+			"id" : "4.50",
+			"text" : "Musical Instruments - Keyboards-4.50%"
+		},
+		{
+			"id" : "11.00",
+			"text" : "Musical Instruments (excluding Guitars and Keyboards)-11.00%"
+		},
+		{
+			"id" : "5.00",
+			"text" : "Consumable Physical Gift Card-5.00%"
+		},
+		{
+			"id" : "17.00",
+			"text" : "Sports Collectibles-17.00%"
+		},
+		{
+			"id" : "17.00",
+			"text" : "Entertainment Collectibles-17.00%"
+		},
+		{
+			"id" : "15.00",
+			"text" : "Coins Collectibles-15.00%"
+		},
+		{
+			"id" : "20.00",
+			"text" : "Fine Art-20.00%"
+		},
+		{
+			"id" : "13.00",
+			"text" : "Pantry-13.00%"
+		},
+		{
+			"id" : "5.00",
+			"text" : "CE/PC/Wireless Mobile Phones & Tablets-5.00%"
+		},
+		{
+			"id" : "5.00",
+			"text" : "Laptops-5.00%"
+		},
+		{
+			"id" : "9.00",
+			"text" : "Scanners and Printers-9.00%"
+		},
+		{
+			"id" : "7.00",
+			"text" : "PC Components (RAM, Motherboards)-7.00%"
+		},
+		{
+			"id" : "6.50",
+			"text" : "Desktops-6.50%"
+		},
+		{
+			"id" : "5.00",
+			"text" : "Monitors-5.00%"
+		},
+		{
+			"id" : "13.5",
+			"text" : "Laptop Battery-13.5%"
+		},
+		{
+			"id" : "5.50",
+			"text" : "Laptops Bags & Sleeves-5.50%"
+		},
+		{
+			"id" : "14.00",
+			"text" : "USB flash drives (Pen Drives)-14.00%"
+		},
+		{
+			"id" : "8.00",
+			"text" : "Hard Disks-8.00%"
+		},
+		{
+			"id" : "25.00",
+			"text" : "Kindle Accessories-25.00%"
+		},
+		{
+			"id" : "12.00",
+			"text" : "Memory Cards-12.00%"
+		},
+		{
+			"id" : "14.00",
+			"text" : "Modems & networking devices-14.00%"
+		},
+		{
+			"id" : "5.50",
+			"text" : "Car Electronics Devices-5.50%"
+		},
+		{
+			"id" : "10.00",
+			"text" : "Electronic Devices (except TV, Camera & Camcorder, Camera Lenses and Accessories, GPS Devices, Speakers)-10.00%"
+		},
+		{
+			"id" : "6.00",
+			"text" : "Television-6.00%"
+		},
+		{
+			"id" : "5.00",
+			"text" : "Camera and Camcorder-5.00%"
+		},
+		{
+			"id" : "6.00",
+			"text" : "Camera Lenses-6.00%"
+		},
+		{
+			"id" : "12.00",
+			"text" : "Camera Accessories-12.00%"
+		},
+		{
+			"id" : "13.50",
+			"text" : "GPS Devices-13.50%"
+		},
+		{
+			"id" : "6.00",
+			"text" : "Speakers-6.00%"
+		},
+		{
+			"id" : "14.00",
+			"text" : "Headsets, Headphones and Earphones-14.00%"
+		},
+		{
+			"id" : "15.00",
+			"text" : "Keyboards and Mouse-15.00%"
+		},
+		{
+			"id" : "20.00",
+			"text" : "Power Banks-20.00%"
+		},
+		{
+			"id" : "17.00",
+			"text" : "Accessories - Electronics, PC and Wireless-17.00%"
+		},
+		{
+			"id" : "16.00",
+			"text" : "Cases/Cover/Skin/Screen guard for <300-16.00%"
+		},
+		{
+			"id" : "24.00",
+			"text" : "Cases/Cover/Skin/Screen guard for >300-24.00%"
+		},
+		{
+			"id" : "25.00",
+			"text" : "Cables - Electronics, PC, Wireless-25.00%"
+		},
+		{
+			"id" : "25.00",
+			"text" : "Selfie Sticks-25.00%"
+		},
+		{
+			"id" : "38.00",
+			"text" : "Warranty Services-38.00%"
+		},
+		{
+			"id" : "22.0",
+			"text" : "Chargers-22.0%"
+		}
+	]
+}

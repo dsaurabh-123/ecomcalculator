@@ -1,0 +1,175 @@
+
+{
+	"results": [
+		
+		{
+			"from" : 0,
+			"to":500,
+			"pick_and_pack":10,
+			"local":24,
+			"regional":30,
+			"national":5
+		},
+		{
+			"from" : 501,
+			"to":1000,
+			"pick_and_pack":10,
+			"local":39,
+			"regional":49,
+			"national":8
+		},
+		{
+			"from" : 1001,
+			"to":2000,
+			"pick_and_pack":15,
+			"local":46,
+			"regional":57,
+			"national":9
+		},
+		{
+			"from" : 2001,
+			"to":3000,
+			"pick_and_pack":15,
+			"local":53,
+			"regional":65,
+			"national":10
+		},
+		{
+			"from" : 3001,
+			"to":4000,
+			"pick_and_pack":15,
+			"local":60,
+			"regional":73,
+			"national":11
+		},
+		{
+			"from" : 4001,
+			"to":4999,
+			"pick_and_pack":15,
+			"local":67,
+			"regional":81,
+			"national":13
+		},
+		{
+			"from" : 5000,
+			"to":5000,
+			"pick_and_pack":25,
+			"local":70,
+			"regional":85,
+			"national":13
+		},
+		{
+			"from" : 5001,
+			"to":6000,
+			"pick_and_pack":25,
+			"local":77,
+			"regional":93,
+			"national":14
+		},
+		{
+			"from" : 6001,
+			"to":7000,
+			"pick_and_pack":25,
+			"local":84,
+			"regional":101,
+			"national":16
+		},
+		{
+			"from" : 7001,
+			"to":8000,
+			"pick_and_pack":25,
+			"local":91,
+			"regional":109,
+			"national":17
+		},
+		{
+			"from" : 8001,
+			"to":9000,
+			"pick_and_pack":25,
+			"local":98,
+			"regional":117,
+			"national":18
+		},
+		{
+			"from" : 9001,
+			"to":10000,
+			"pick_and_pack":25,
+			"local":105,
+			"regional":125,
+			"national":20
+		},
+		{
+			"from" : 10001,
+			"to":11000,
+			"pick_and_pack":25,
+			"local":112,
+			"regional":133,
+			"national":21
+		},
+		{
+			"from" : 11001,
+			"to":11999,
+			"pick_and_pack":25,
+			"local":119,
+			"regional":141,
+			"national":22
+		},
+		{
+			"from" : 12000,
+			"to":12000,
+			"pick_and_pack":50,
+			"local":160,
+			"regional":240,
+			"national":"NA"
+		},
+		{
+			"from" : 12001,
+			"to":13000,
+			"pick_and_pack":50,
+			"local":163,
+			"regional":244,
+			"national":"NA"
+		},
+		{
+			"from" : 13001,
+			"to":14000,
+			"pick_and_pack":50,
+			"local":166,
+			"regional":248,
+			"national":"NA"
+		},
+		{
+			"from" : 14001,
+			"to":15000,
+			"pick_and_pack":50,
+			"local":169,
+			"regional":252,
+			"national":"NA"
+		},
+		{
+			"from" : 15001,
+			"to":16000,
+			"pick_and_pack":50,
+			"local":172,
+			"regional":256,
+			"national":"NA"
+		},
+		{
+			"from" : 16001,
+			"to":17000,
+			"pick_and_pack":50,
+			"local":175,
+			"regional":260,
+			"national":"NA"
+		},
+		{
+			"from" : 17001,
+			"to":18000,
+			"pick_and_pack":50,
+			"local":178,
+			"regional":264,
+			"national":"NA"
+		}
+
+	]
+}

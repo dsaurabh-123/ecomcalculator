@@ -1,0 +1,56 @@
+{
+	"results": [{
+			"from": 0,
+			"to": 250,
+			"selectedCategory": 15,
+			"otherCategory": 25
+		},
+		{
+			"from": 251,
+			"to": 500,
+			"selectedCategory": 15,
+			"otherCategory": 20
+		},
+		{
+			"from": 501,
+			"to": 1000,
+			"selectedCategory": 15,
+			"otherCategory": 15
+		},
+		{
+			"from": 1001,
+			"to": "above",
+			"selectedCategory": 30,
+			"otherCategory": 30
+		}
+	],
+	"selectedCategories": [
+		"Books",
+		"Music",
+		"Pet Products",
+		"Beauty (excluding Fragrance)",
+		"Health and Personal Car",
+		"(excluding Nutrition and Body Support)",
+		"Grocery and Goum'iet",
+		"Baby",
+		"Toys",
+		"Appare",
+		"lnnerwear and Apparel Accessories",
+		"Craft Materials",
+		"Automotive (excluding Accessories",
+		"Helmets",
+		"Lubricants",
+		"Parts",
+		"Tools",
+		"Vehicle Care and fires)",
+		"Cases Covers Skins and Screen",
+		"Guards",
+		"Cables - Electronics PC and Wireless",
+		"Selfie Sticks",
+		"Office Products",
+		"Lawn & Garden",
+		"Chemical Pest Control",
+		"Business Industrial and Scien tific Supplies"
+	]
+
+}
