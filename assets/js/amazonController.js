@@ -145,10 +145,6 @@ $(document).on("click", "#fixClosingBtn", function(){
   $('.fixclosingFee').show();
 });
 
-function ReferalFee() {
-  var temp = $("#referralFees").val();
-  // console.log(temp);
-}
 
 function calculateProfit() {
   // var shippingCharges= $("#shippingCharges").val();
@@ -162,10 +158,27 @@ function calculateProfit() {
   var profit = 0;
   var amazon_fee=0;
   var total_deductions=0;
+
+    //check which shipping type is selected
+  var radioValueshippingtype = $("input[name='shippingType']:checked").val();
+    console.log(radioValueshippingtype);
+    if(radioValueshippingtype == 'fba'){
+        $(".pickpack").css("display", "block");
+    }else {
+         $(".pickpack").css("display", "none");
+         var picknpack=0;
+    }
+  
+ // ends here
+  
   //debugger;
   var profit = sellingPrice - buyingPrice - shippingCharges - referalCharges - fixclosingCharges - tax - picknpack;
-  var amazon_fee = parseInt(referalCharges) + parseInt(fixclosingCharges) + parseInt(tax);
+  var amazon_fee = parseInt(referalCharges) + parseInt(fixclosingCharges)+parseInt(picknpack) + parseInt(tax);
   var total_deductions = parseInt(amazon_fee) + parseInt(buyingPrice) + parseInt(shippingCharges);
+
+
+
+
   // debugger;
   if(profit < 0){
     $("#profiBtn, #total_profit").css("background", "#db3951");
@@ -183,6 +196,7 @@ function calculateProfit() {
   $("#shippingCharges1").val('-'+shippingCharges);
   $("#fixclosingCharges1").val('-'+fixclosingCharges);
   $("#referalCharges1").val('-'+referalCharges);
+  $("#picknpack_charge").val('-'+picknpack);
   $("#gst").val('-'+tax);
   // debugger;
   $("#amazon_feees1").val('-'+amazon_fee);
@@ -283,8 +297,11 @@ function Shipping_Type(){
         $(".fba").css("display", "block");
     }else {
          $(".fba").css("display", "none");
-         // var pickprice=0;
-         // $("#picknPack").val(pickprice);    
+            
+    }
+
+    if(radioValueshippingtype=='selfShip'){
+      $(".self_amaz").css("display", "none")
     }
     
 
@@ -323,4 +340,15 @@ function NewSellingP(){
     console.log(new_sp);
     document.getElementById("new_spp").innerHTML = "New Selling Price = "+new_sp;
     
+}
+
+function ReferalFee() {
+  var temp = $("#referralFees").val();
+  var sellingPrice = $("#sellingPrice").val();
+  var rf_fee=(temp/100)*sellingPrice;
+  $("#referralFeesAmout").val(rf_fee);
+
+ // var a=$("#referralFeesAmout").val();
+  console.log(a);
+  console.log(rf_fee);
 }
