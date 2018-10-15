@@ -75,7 +75,7 @@ app.controller("amazonController", function($scope, $http) {
 
 $(document).on("click", "#profiBtn", calculateProfit);
 
-$(document).on("click", "#modified_selling_price", NewSellingP);
+$(document).on("click", "#getProfit", NewSellingP);
 
 $(document).on("change", ".dimen", VolumetricCal);
 
@@ -90,6 +90,8 @@ $(document).on("change", "input[type=radio]", ".shippingType", Shipping_Type);
 
 //when user click on pick and pack ....................................
 $(document).on("change", "#sellingPrice", PicknPack);
+
+$(document).on("change", "#sellingPrice1", desir_profit);
 
 //when click onn fixclosing button open
 $(document).on("click", "#fixClosingBtn", function(){
@@ -224,7 +226,7 @@ function VolumetricCal() {
 function CallculTax() {
   var sp = $("#sellingPrice").val();
   var tax_amt = (sp / 100) * 18;
-  $("#total_tax").val(tax_amt);
+  $("#total_tax").val(tax_amt.toFixed(2));
   // console.log(tax_amt);
 }
 
@@ -293,17 +295,26 @@ function fbaFixClosing(filename, selector){
 function Shipping_Type(){
     var radioValueshippingtype = $("input[name='shippingType']:checked").val();
     console.log(radioValueshippingtype);
+
     if(radioValueshippingtype == 'fba'){
         $(".fba").css("display", "block");
-    }else {
-         $(".fba").css("display", "none");
-            
+        $(".self_amaz").css("display", "block");
+        document.getElementById('shippingCharges').readOnly = true;
     }
 
-    if(radioValueshippingtype=='selfShip'){
-      $(".self_amaz").css("display", "none")
+    else if (radioValueshippingtype=='easyShip'){
+         $(".fba").css("display", "none");
+         $(".self_amaz").css("display", "block");
+         document.getElementById('shippingCharges').readOnly = true;
+            
     }
-    
+    else {
+
+      $(".self_amaz").css("display", "none");
+      //document.getElementById('shippingCharges').removeAttribute('readonly');
+      document.getElementById('shippingCharges').readOnly = false;
+      return 0;
+    }   
 
 }
 
@@ -328,27 +339,90 @@ function PicknPack(){
 }
 
 function NewSellingP(){
-    var d_profit=$("#desired_profit").val();
-    var old_profit=$("#total_profit").val();
-    var sp = $("#sellingPrice").val();
-    var new_sp=0;
-
-    var new_sp=(sp*d_profit)/old_profit;
-    console.log(d_profit);
-    console.log(old_profit);
-    console.log(sp);
-    console.log(new_sp);
-    document.getElementById("new_spp").innerHTML = "New Selling Price = "+new_sp;
-    
+ // console.log('in new sellingPrice1');
+   document.getElementById("sellingPrice1").readOnly = false;
+   $("#sellingPrice1").attr("placeholder", "Enter desired profit");
+   document.getElementById("sellingPrice1").focus();
+    document.getElementById("sellingPrice1").select();
+      
 }
+
+
+function desir_profit(){
+  console.log("inside new desir_profit");
+    var bp=$("#buyingPrice1").val();
+    var new_sp = $("#sellingPrice1").val();
+    var rf=$("#referralFees").val();
+    var new_rf=(rf/100)*new_sp;
+    var new_tx=(18/100)*new_sp;
+
+
+
+    var d_profit=$("#total_profit1").val();
+    var old_profit=$("#total_profit").val();
+    
+    console.log(rf); console.log(new_rf); console.log(new_tx); console.log(new_sp);
+
+    var nship=0;
+   // $("#sellingPrice1").val(new_sp.toFixed(2));
+
+ function new_shipp(){
+
+debugger;
+  var sp = $("#sellingPrice1").val();
+  console.log(sp);
+  var shippingCharges = 0;
+
+var valueRange = $("input[name='shippingRange']:checked").val();
+debugger;
+
+  $.get("assets/data/amazon-easyShip-shipping.json", function(response, status) {
+    fbaFixClosing("amazon-fba-fixClosing.json", "#fixClosingAmount");
+    var len = response.results.length;
+    console.log(len);
+    for (var i = 0; i < len; i++) {
+      if (sp >= response.results[i].from && sp <= response.results[i].to) {
+        if (valueRange == "local") {debugger;
+          shippingCharges = response.results[i].local;
+          console.log(shippingCharges);
+           $("#shippingCharges1").val(shippingCharges);
+          nship=shippingCharges;
+          return shippingCharges;
+          debugger;
+          break;
+        } else if (valueRange == "regional") {debugger;
+          shippingCharges = response.results[i].regional;
+          console.log(shippingCharges);
+           $("#shippingCharges1").val(shippingCharges);
+          nship=shippingCharges;
+          return shippingCharges;
+          debugger;
+          break;
+        } else {debugger;
+          shippingCharges = response.results[i].national;
+          console.log(shippingCharges);
+          $("#shippingCharges1").val(shippingCharges);
+          nship=shippingCharges;
+          return shippingCharges;
+          break;
+        }
+      }
+    }
+  });
+  }
+     console.log(new_shipp());
+
+}
+
+
 
 function ReferalFee() {
   var temp = $("#referralFees").val();
   var sellingPrice = $("#sellingPrice").val();
   var rf_fee=(temp/100)*sellingPrice;
-  $("#referralFeesAmout").val(rf_fee);
+  $("#referralFeesAmout").val(rf_fee.toFixed(2));
 
  // var a=$("#referralFeesAmout").val();
   console.log(a);
-  console.log(rf_fee);
+  //console.log(rf_fee);
 }
