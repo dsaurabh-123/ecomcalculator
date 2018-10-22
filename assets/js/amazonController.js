@@ -348,6 +348,22 @@ function NewSellingP(){
 }
 
 
+// to set up new sellimg price call jason data here only 
+
+
+var abc=20;
+
+function xyz(){
+  //console.log(abc);
+  $.get("assets/data/amazon-easyShip-shipping.json" , function(response, status){
+  // var len=response.results.length;
+   abc=response;
+   //console.log(abc);
+  });
+}
+
+xyz();
+
 function desir_profit(){
   console.log("inside new desir_profit");
     var bp=$("#buyingPrice1").val();
@@ -355,64 +371,140 @@ function desir_profit(){
     var rf=$("#referralFees").val();
     var new_rf=(rf/100)*new_sp;
     var new_tx=(18/100)*new_sp;
-
-
-
     var d_profit=$("#total_profit1").val();
     var old_profit=$("#total_profit").val();
+    var n_shipping= new_shipp(new_sp);
+    console.log(n_shipping);
     
-    console.log(rf); console.log(new_rf); console.log(new_tx); console.log(new_sp);
+    var n_fixclosing= new_fix();
 
-    var nship=0;
-   // $("#sellingPrice1").val(new_sp.toFixed(2));
 
- function new_shipp(){
+    function new_fix(){
+      
+    }
+   // console.log(rf); console.log(new_rf); console.log(new_tx); console.log(new_sp);
+  //  console.log(new_shipp(new_sp));
+
 
 debugger;
-  var sp = $("#sellingPrice1").val();
+
+function new_shipp(new_sp){
+  console.log(abc);
+  var sp=new_sp;
+  var new_shipping=0;
+  var ship_type=$("input[name='shippingRange']:checked").val();
   console.log(sp);
+  console.log(ship_type);
+  var len=abc.results.length;
+  console.log(len);
+
+  for(var i=0; i<len;i++){
+    if(sp>=abc.results[i].from && sp<=abc.results[i].to){
+      debugger;
+      console.log("hyy");
+      if(ship_type=="local"){
+        new_shipping=abc.results[i].local;
+        // console.log(new_shipping);
+       return new_shipping;
+        
+      }
+      else if(ship_type=="regional"){
+        new_shipping=abc.results[i].regional;
+        // console.log(new_shipping);
+        return new_shipping;
+        
+      }
+      else {
+        new_shipping=abc.results[i].national;
+        // console.log(new_shipping);
+        return new_shipping;
+      }
+    }
+  }
+
+
+  // $.get("assets/data/amazon-easyShip-shipping.json", function(response, status){
+  // var len=response.results.length;
+  // console.log(len);
+
+  // for(var i=0; i<len;i++){
+  //   if(sp>=response.results[i].from && sp<=response.results[i].to){
+  //     
+  //     if(ship_type=="local"){
+  //       new_shipping=response.results[i].local;
+  //       console.log(new_shipping);
+        
+  //       return new_shipping;
+  //       debugger;
+  //     }
+  //     else if(ship_type=="regional"){
+  //       new_shipping=response.results[i].regional;
+  //       console.log(new_shipping);
+        
+  //       return new_shipping;
+  //       debugger;
+  //     }
+  //     else {
+  //       new_shipping=response.results[i].national;
+  //       console.log(new_shipping);
+        
+  //       return new_shipping;
+  //     }
+  //   }
+  // }
+  // });
+
+  // return new_shipping;
+
+}
+
+
+ function new_ship(new_sp){
+  var sp = new_sp;
   var shippingCharges = 0;
 
 var valueRange = $("input[name='shippingRange']:checked").val();
 debugger;
 
   $.get("assets/data/amazon-easyShip-shipping.json", function(response, status) {
-    fbaFixClosing("amazon-fba-fixClosing.json", "#fixClosingAmount");
+   // fbaFixClosing("amazon-fba-fixClosing.json", "#fixClosingAmount");
     var len = response.results.length;
     console.log(len);
+    debugger;
     for (var i = 0; i < len; i++) {
       if (sp >= response.results[i].from && sp <= response.results[i].to) {
-        if (valueRange == "local") {debugger;
+        if (valueRange == "local") {
+          debugger;
           shippingCharges = response.results[i].local;
           console.log(shippingCharges);
            $("#shippingCharges1").val(shippingCharges);
-          nship=shippingCharges;
           return shippingCharges;
           debugger;
-          break;
-        } else if (valueRange == "regional") {debugger;
+        } else if (valueRange == "regional") {
+          debugger;
           shippingCharges = response.results[i].regional;
           console.log(shippingCharges);
            $("#shippingCharges1").val(shippingCharges);
-          nship=shippingCharges;
           return shippingCharges;
           debugger;
-          break;
-        } else {debugger;
+          
+        } else {
+          debugger;
           shippingCharges = response.results[i].national;
           console.log(shippingCharges);
           $("#shippingCharges1").val(shippingCharges);
-          nship=shippingCharges;
-          return shippingCharges;
-          break;
+          return shippingCharges;          
         }
       }
     }
+
   });
+
+ // console.log(shippingCharges);
   }
-     console.log(new_shipp());
 
 }
+
 
 
 
