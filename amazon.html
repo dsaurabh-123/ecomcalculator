@@ -44,7 +44,7 @@
             Price
           </div>
           <div class="col-4">
-            <input type="number" name="buyingPrice" id="buyingPrice" class=""  />
+            <input type="number" name="buyingPrice" id="buyingPrice" value="" class=""  />
           </div>
           <div class="col-2">
             &#8377; 
@@ -59,7 +59,7 @@
             Price
           </div>
           <div class="col-4">
-            <input type="number" name="sellingPrice" id="sellingPrice" class="" />
+            <input type="number" name="sellingPrice" id="sellingPrice" value="" class="" />
           </div>
           <div class="col-1">
             &#8377;
@@ -166,7 +166,7 @@
             <input type="radio"   name="shippingRange" value="regional" class="customCheckbox" /> Regional
           </div>
           <div class="col-4">
-            <input type="radio"  name="shippingRange" value="national" class="customCheckbox" /> National
+            <input type="radio"  name="shippingRange" value="national" class="customCheckbox" id="nationalArea" /> National
           </div>
         </div>
       </div>
@@ -496,314 +496,314 @@
       </div> -->
 
      <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content modal_modified">
-      <div class="modal-header modal_head_modified">
-        <h5 class="modal-title" id="exampleModalLabel">All Deductions</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body modal_body_modified">
-         <div class="col-12" id="profit_loss_desc" style="display: none;">
-        <div class="row mt10 profit_class ">
-          <div class="col-4">
-            <p class="" id="" href="javascript:;">Profit</p>
-          </div>
-          <div class="col-4">
-            &nbsp;
-          </div>
-          <div class="col-4">
-            <div class="row">
-              <div class="col-10">
-                <input type="text" readonly="" name="" placeholder="" id="total_profit1" class=""/>
-              </div>
-              <div class="col-2">
-                &#8377;
-              </div>
-            </div>
-          </div>
-        </div> 
-
-       <div class="deductions">
-         <div class="row mt10 ">
-          <div class="col-4">
-            <p class="" >Selling Price</p>
-          </div>
-          <div class="col-4">
-            &nbsp;
-          </div>
-          <div class="col-4">
-            <div class="row">
-              <div class="col-10">
-                <input type="text" readonly="" name="" placeholder="" id="sellingPrice1" class=""/>
-              </div>
-              <div class="col-2">
-                &#8377;
-              </div>
-            </div>
-          </div>
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content modal_modified">
+        <div class="modal-header modal_head_modified">
+          <h5 class="modal-title" id="exampleModalLabel">All Deductions</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-        <hr class="hr_style">
-
-        <div class="row mt10 ">
-          <div class="col-4">
-            <p class=""  >Buying Price</p>
-          </div>
-          <div class="col-4">
-            &nbsp;
-          </div>
-          <div class="col-4">
-            <div class="row">
-              <div class="col-10">
-                <input type="text" readonly="" name="" placeholder="" id="buyingPrice1" class=""/>
+        <div class="modal-body modal_body_modified">
+           <div class="col-12" id="profit_loss_desc" style="display: none;">
+          <div class="row mt10 profit_class ">
+            <div class="col-4">
+              <p class="" id="" href="javascript:;">Profit</p>
+            </div>
+            <div class="col-4">
+              &nbsp;
+            </div>
+            <div class="col-4">
+              <div class="row">
+                <div class="col-10">
+                  <input type="text" readonly="" name="" placeholder="" id="total_profit1" class=""/>
+                </div>
+                <div class="col-2">
+                  &#8377;
+                </div>
               </div>
-              <div class="col-2">
-                &#8377;
+            </div>
+          </div> 
+
+         <div class="deductions">
+           <div class="row mt10 ">
+            <div class="col-4">
+              <p class="" >Selling Price</p>
+            </div>
+            <div class="col-4">
+              &nbsp;
+            </div>
+            <div class="col-4">
+              <div class="row">
+                <div class="col-10">
+                  <input type="text" readonly="" name="" placeholder="" id="sellingPrice1" class=""/>
+                </div>
+                <div class="col-2">
+                  &#8377;
+                </div>
               </div>
             </div>
           </div>
-        </div>
+          <hr class="hr_style">
 
-
-        
           <div class="row mt10 ">
-          <div class="col-4">
-            <p class=""  >Shipping</p>
-          </div>
-          <div class="col-4">
-            &nbsp;
-          </div>
-          <div class="col-4">
-            <div class="row">
-              <div class="col-10">
-                <input type="text" readonly="" name="" placeholder="" id="shippingCharges1" class=""/>
-              </div>
-              <div class="col-2">
-                &#8377;
+            <div class="col-4">
+              <p class=""  >Buying Price</p>
+            </div>
+            <div class="col-4">
+              &nbsp;
+            </div>
+            <div class="col-4">
+              <div class="row">
+                <div class="col-10">
+                  <input type="text" readonly="" name="" placeholder="" id="buyingPrice1" class=""/>
+                </div>
+                <div class="col-2">
+                  &#8377;
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        
-        
-        
-        <div class="row mt10 ">
-          <div class="col-7">
-            <p class="" id="" href="javascript:;">Amazon Fees</p>
-          </div>
-          <div class="col-1">
-            &nbsp;
-          </div>
-          <div class="col-4">
-            <div class="row">
-              <div class="col-10">
-                <input type="text" readonly="" name="" placeholder="" id="amazon_feees1" class=""/>
-              </div>
-              <div class="col-2">
-                &#8377;
+
+
+          
+            <div class="row mt10 ">
+            <div class="col-4">
+              <p class=""  >Shipping</p>
+            </div>
+            <div class="col-4">
+              &nbsp;
+            </div>
+            <div class="col-4">
+              <div class="row">
+                <div class="col-10">
+                  <input type="text" readonly="" name="" placeholder="" id="shippingCharges1" class=""/>
+                </div>
+                <div class="col-2">
+                  &#8377;
+                </div>
               </div>
             </div>
           </div>
-        </div>
-
-        <div class="row mt10 ">
-          <div class="col-1"></div>
-          <div class="col-3">
-            <p class="" id="" href="javascript:;"><sup class="amazon_li">*</sup> Ref fee</p>
-          </div>
-          <div class="col-4">
-            &nbsp;
-          </div>
-          <div class="col-4">
-            <div class="row">
-              <div class="col-10">
-                <input type="text" readonly="" name="" placeholder="" id="referalCharges1" class=""/>
-              </div>
-              <div class="col-2">
-                &#8377;
+          
+          
+          
+          <div class="row mt10 ">
+            <div class="col-7">
+              <p class="" id="" href="javascript:;">Amazon Fees</p>
+            </div>
+            <div class="col-1">
+              &nbsp;
+            </div>
+            <div class="col-4">
+              <div class="row">
+                <div class="col-10">
+                  <input type="text" readonly="" name="" placeholder="" id="amazon_feees1" class=""/>
+                </div>
+                <div class="col-2">
+                  &#8377;
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div class="row mt10 ">
-          <div class="col-1"></div>
-          <div class="col-3">
-            <p class="" id="" href="javascript:;"><sup class="amazon_li">*</sup>Fix closing</p>
-          </div>
-          <div class="col-4">
-            &nbsp;
-          </div>
-          <div class="col-4">
-            <div class="row">
-              <div class="col-10">
-                <input type="text" readonly="" name="" placeholder="" id="fixclosingCharges1" class=""/>
-              </div>
-              <div class="col-2">
-                &#8377;
+          <div class="row mt10 ">
+            <div class="col-1"></div>
+            <div class="col-3">
+              <p class="" id="" href="javascript:;"><sup class="amazon_li">*</sup> Ref fee</p>
+            </div>
+            <div class="col-4">
+              &nbsp;
+            </div>
+            <div class="col-4">
+              <div class="row">
+                <div class="col-10">
+                  <input type="text" readonly="" name="" placeholder="" id="referalCharges1" class=""/>
+                </div>
+                <div class="col-2">
+                  &#8377;
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-
-       <div class="pickpack">
-         <div class="row mt10">
-          <div class="col-1"></div>
-          <div class="col-3">
-            <p class="" id="" href="javascript:;"><sup class="amazon_li">*</sup>Pick n Pack</p>
-          </div>
-          <div class="col-4">
-            &nbsp;
-          </div>
-          <div class="col-4">
-            <div class="row">
-              <div class="col-10">
-                <input type="text" readonly="" name="" placeholder="" id="picknpack_charge" class=""/>
-              </div>
-              <div class="col-2">
-                &#8377;
+          <div class="row mt10 ">
+            <div class="col-1"></div>
+            <div class="col-3">
+              <p class="" id="" href="javascript:;"><sup class="amazon_li">*</sup>Fix closing</p>
+            </div>
+            <div class="col-4">
+              &nbsp;
+            </div>
+            <div class="col-4">
+              <div class="row">
+                <div class="col-10">
+                  <input type="text" readonly="" name="" placeholder="" id="fixclosingCharges1" class=""/>
+                </div>
+                <div class="col-2">
+                  &#8377;
+                </div>
               </div>
             </div>
           </div>
-        </div>
-       </div>   
-        
 
-        <div class="row mt10 ">
-          <div class="col-1"></div>
-          <div class="col-3">
-            <p class="" id="" href="javascript:;"><sup class="amazon_li">*</sup>GST</p>
-          </div>
-          <div class="col-4">
-            &nbsp;
-          </div>
-          <div class="col-4">
-            <div class="row">
-              <div class="col-10">
-                <input type="text" readonly="" name="" placeholder="" id="gst" class=""/>
-              </div>
-              <div class="col-2">
-                &#8377;
+
+         <div class="pickpack">
+           <div class="row mt10">
+            <div class="col-1"></div>
+            <div class="col-3">
+              <p class="" id="" href="javascript:;"><sup class="amazon_li">*</sup>Pick n Pack</p>
+            </div>
+            <div class="col-4">
+              &nbsp;
+            </div>
+            <div class="col-4">
+              <div class="row">
+                <div class="col-10">
+                  <input type="text" readonly="" name="" placeholder="" id="picknpack_charge" class=""/>
+                </div>
+                <div class="col-2">
+                  &#8377;
+                </div>
               </div>
             </div>
           </div>
-        </div>
+         </div>   
+          
 
-        <hr class="hr_style">
-
-        <div class="row mt10 ">
-          <div class="col-4">
-            <p class="" id="" href="javascript:;">Total</p>
-          </div>
-          <div class="col-4">
-            &nbsp;
-          </div>
-          <div class="col-4">
-            <div class="row">
-              <div class="col-10">
-                <input type="text" readonly="" name="" placeholder="" id="total_deductions1" class=""/>
-              </div>
-              <div class="col-2">
-                &#8377;
+          <div class="row mt10 ">
+            <div class="col-1"></div>
+            <div class="col-3">
+              <p class="" id="" href="javascript:;"><sup class="amazon_li">*</sup>GST</p>
+            </div>
+            <div class="col-4">
+              &nbsp;
+            </div>
+            <div class="col-4">
+              <div class="row">
+                <div class="col-10">
+                  <input type="text" readonly="" name="" placeholder="" id="gst" class=""/>
+                </div>
+                <div class="col-2">
+                  &#8377;
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <hr class="hr_style">
+          <hr class="hr_style">
 
-        <div class="row mt10 ">
-          <div class="col-4">
-            <p class="" id="" href="javascript:;">Profit</p>
-          </div>
-          <div class="col-4">
-            &nbsp;
-          </div>
-          <div class="col-4">
-            <div class="row">
-              <div class="col-10">
-                <input type="text" readonly="" name="" placeholder="" id="total_profit2" class=""/>
-              </div>
-              <div class="col-2">
-                &#8377;
+          <div class="row mt10 ">
+            <div class="col-4">
+              <p class="" id="" href="javascript:;">Total</p>
+            </div>
+            <div class="col-4">
+              &nbsp;
+            </div>
+            <div class="col-4">
+              <div class="row">
+                <div class="col-10">
+                  <input type="text" readonly="" name="" placeholder="" id="total_deductions1" class=""/>
+                </div>
+                <div class="col-2">
+                  &#8377;
+                </div>
               </div>
             </div>
           </div>
+
+          <hr class="hr_style">
+
+          <div class="row mt10 ">
+            <div class="col-4">
+              <p class="" id="" href="javascript:;">Profit</p>
+            </div>
+            <div class="col-4">
+              &nbsp;
+            </div>
+            <div class="col-4">
+              <div class="row">
+                <div class="col-10">
+                  <input type="text" readonly="" name="" placeholder="" id="total_profit2" class=""/>
+                </div>
+                <div class="col-2">
+                  &#8377;
+                </div>
+              </div>
+            </div>
+          </div>
+         </div>
+                  
         </div>
-       </div>
-                
-      </div>
-      </div>
-      <div class="modal-footer">
-       <!--  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
-       <a href="javascript:;" id="getProfit" class="suggestionBtn" data-toggle="modal" data-target="#exampleModalLong2"> Get selling price for <span class="linebreak"></span>desire profit?</a>
+        </div>
+        <div class="modal-footer">
+         <!--  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+         <a href="javascript:;" id="getProfit" class="suggestionBtn" data-toggle="modal" data-target="#exampleModalLong2"> Get selling price for <span class="linebreak"></span>desire profit?</a>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
 
 
-     <!-- ends here ........... -->
+       <!-- ends here ........... -->
 
-      <div class="col-12">&nbsp;</div>
+        <div class="col-12">&nbsp;</div>
 
-      <!-- <div class="col-12 text-center mt10">
-        <a href="javascript:;" id="getProfit" class="suggestionBtn" data-toggle="modal" data-target="#exampleModalLong2"> Get selling price for <span class="linebreak"></span>desire profit?</a>
-      </div> -->
+        <!-- <div class="col-12 text-center mt10">
+          <a href="javascript:;" id="getProfit" class="suggestionBtn" data-toggle="modal" data-target="#exampleModalLong2"> Get selling price for <span class="linebreak"></span>desire profit?</a>
+        </div> -->
 
-     <!--  modal for desired profit--- -->
-        <!-- Modal -->
-<div class="modal fade" id="exampleModalLong2_" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content modal_modified mleft-40">
-      <div class="modal-header modal_head_modified">
-        <h6 class="modal-title" id="exampleModalLongTitle">Enter desired profit</h6>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body modal_body_modified">
-        <div class="input-group">
-         <input type="text" class="form-control" aria-label="" class="desired_profit2" id="desired_profit" placeholder="Enter desired profit" style="height: 50px;">
-           <!-- <div class="input-group-append">
-             <span class="input-group-text">$</span>
-             <span class="input-group-text">0.00</span>
-          </div> -->
-      </div>
-      </div>
-
-      <div class="modal-footer">
-        <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
-        <button type="button" class="btn btn-primary" id="modified_selling_price" >Click to get Selling Price</button>
-      </div>
-      <h6 id="new_spp"></h6>
-    </div>
-  </div>
-</div>
-
-     <!-- ends here -->
-
-      <div class="col-12 modalDropdown">
-        <div class="referelfeesDropdown">
-          <select class="referalFees js-data-example-ajax" data-placeholder="Select a Referal fee" id="referalFees" name="referalFees">
-          </select>
+       <!--  modal for desired profit--- -->
+          <!-- Modal -->
+  <div class="modal fade" id="exampleModalLong2_" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content modal_modified mleft-40">
+        <div class="modal-header modal_head_modified">
+          <h6 class="modal-title" id="exampleModalLongTitle">Enter desired profit</h6>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body modal_body_modified">
+          <div class="input-group">
+           <input type="text" class="form-control" aria-label="" class="desired_profit2" id="desired_profit" placeholder="Enter desired profit" style="height: 50px;">
+             <!-- <div class="input-group-append">
+               <span class="input-group-text">$</span>
+               <span class="input-group-text">0.00</span>
+            </div> -->
+        </div>
         </div>
 
-        <div class="fixclosingFee">
-          <table class='table table-bordered'>
-            <tr class="heading">
-              <td>Name</td>
-              <td>Value</td>
-            </tr>
-          </table>
+        <div class="modal-footer">
+          <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+          <button type="button" class="btn btn-primary" id="modified_selling_price" >Click to get Selling Price</button>
         </div>
+        <h6 id="new_spp"></h6>
       </div>
-
     </div>
   </div>
+
+       <!-- ends here -->
+
+        <div class="col-12 modalDropdown">
+          <div class="referelfeesDropdown">
+            <select class="referalFees js-data-example-ajax" data-placeholder="Select a Referal fee" id="referalFees" name="referalFees">
+            </select>
+          </div>
+
+          <div class="fixclosingFee">
+            <table class='table table-bordered'>
+              <tr class="heading">
+                <td>Name</td>
+                <td>Value</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
 
 </div>  

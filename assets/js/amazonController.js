@@ -1,29 +1,79 @@
 // controller for amazon page
 app.controller("amazonController", function($scope, $http) {});
 
-// //DECLARING flobal variables ..............................................................................
+$(document).ready(function(){
+    
+    // //DECLARING flobal variables ..............................................................................
+    var abc = 20;
+    var fbashippingValue=0;
+    var easyshipShippingValue=0;
+    var fbxFixclosingValue=0;
+    var easyshipFixClosingValue=0;
+
+});
+
+//This function will trigger when window is completly loaded
+window.onload = function(e) {
+   console.log("window loaded");
+   xyz();
+   fbashipping();
+   easyshipShipping();
+   fbxFixclosing();
+   easyshipFixClosing();
+};
+
+//calling all jason values here so that we can use it later..........................................................
+
+function fbashipping(){
+        $.get("assets/data/amazon-fba-shipping.json", function(response, status) {
+            // console.log(response);
+            fbashippingValue = response;
+            // console.log(a);
+
+        });
+    
+}
+
+function easyshipShipping(){
+         $.get("assets/data/amazon-easyShip-shipping.json", function(response, status) {
+          // console.log(response);
+          easyshipShippingValue = response;
+         });
+
+}
+
+function fbxFixclosing(){
+        $.get("assets/data/amazon-fba-fixClosing.json", function(response, status) {
+             // console.log(response);
+            fbxFixclosingValue = response;
+            // console.log(a);
+
+        });
+
+}
+
+function easyshipFixClosing(){
+
+        $.get("assets/data/amazon-easyShip-fixClosing.json", function(response, status) {
+             // console.log(response);
+            easyshipFixClosingValue = response;
+            // console.log(a);
+
+        });
+
+
+}
+
+//ends here ..........................................................................................................
 
 $(document).on("click", "#profiBtn", calculateProfit);
 
 $(document).on("click", "#getProfit", NewSellingP);
 
-$(document).on("change", ".dimen", VolumetricCal);
-
-//$(document).on("change", "#sellingPrice", CallculTax, fixClos);
-
+$(document).on("change", ".dimen", VolumetricCalculation);
 
 //this is done so that on change of SP both RF and Tax will be calculated
-$(document).on("change", "#sellingPrice", onsellingprice);
-
-
-function onsellingprice(){
-  CallculTax();
- fixClos();
-};
-
-
-
-$(document).on("change", "#referralFees", ReferalFee);
+$(document).on("change", "#sellingPrice", sellingPriceHandler);
 
 $(document).on("change", "input[type=radio]", ".customCheckbox", Shipping_Charges);
 
@@ -36,7 +86,85 @@ $(document).on("change", "#sellingPrice", PicknPack);
 $(document).on("change", "#sellingPrice1", desir_profit);
 
 //when click onn fixclosing button open
-$(document).on("click", "#fixClosingBtn", function() {
+$(document).on("click", "#fixClosingBtn", fixClosingBtnHandler);
+
+// when click onn refereal fees button got clicked open
+$(document).on("click", "#referalFeesBtn", referalFeesBtnHandler);
+
+//This event trigger when user manually change reference fees in input box
+$(document).on("change", "#referralFees", referalPercentToPrice)
+
+//THis event trigger when dropdown on modal get selected 
+$(document).on("change", "#referalFees", referalFeesHandler);
+
+
+
+
+function referalFeesHandler(){
+    
+    //defining variable
+    var productCategory,
+        indexOfHyphen;
+
+    modalDropdownHide();
+    
+    $("#referralFees").val(parseFloat($("#referalFees").val()));
+
+    //this code block will convert 
+    //Eg. "   Consumables Pet Food (Dog Food)-14.00% "
+    //to "consumables pet food (dog food)"
+    //will remove content after last hyphen beacuase need 
+    //only name of product category
+    productCategory = $("#referalFees option:selected").text();
+    indexOfHyphen = productCategory.lastIndexOf("-");
+    productCategory =  productCategory.slice(0, indexOfHyphen);
+    productCategory =  $.trim(productCategory.toLowerCase());
+
+    //setting Product category to localstorage for fix closing and other calculation
+    localStorage.setItem("productCategory", productCategory);
+    
+    // This function will set refreal fees
+    // referalPercentToPrice();
+    referalPercentToPrice();
+}
+
+function referalPercentToPrice(){
+    //defining variables
+    var referalPercentage,
+        sellingPrice,
+        output;
+
+    //getting value and make sure both values in float data type
+    //and make 2 digits after point for standard output
+    referalPercentage = $("#referralFees").val();
+    referalPercentage = parseFloat(referalPercentage).toFixed(2);
+    referalPercentage = parseFloat(referalPercentage);
+
+    sellingPrice = $("#sellingPrice").val();
+    if(stringEmptyChecker(sellingPrice)){
+        sellingPrice = parseFloat(sellingPrice).toFixed(2);
+        sellingPrice = parseFloat(sellingPrice);
+
+        //calculation
+        // output = sellingPrice / referalPercentage;
+        referalAmount = ((referalPercentage / 100) * sellingPrice);
+
+        //setter
+        $("#referralFeesAmout").val(referalAmount.toFixed(2));
+    }
+    
+}
+
+
+function referalFeesBtnHandler(){
+    getJsonData("amazon-referal-fees.json", "#referalFees");
+    $('#referalFees').select2();
+    modalDropdownShow();
+    $('.fixclosingFee').hide();
+    $('.referelfeesDropdown').show();
+}
+
+function fixClosingBtnHandler() {
 
     var ecomName = $(".calculator").attr("id");
     var shippingType = $("input[name='shippingType']:checked").val();
@@ -81,8 +209,32 @@ $(document).on("click", "#fixClosingBtn", function() {
     modalDropdownShow();
     $('.referelfeesDropdown').hide();
     $('.fixclosingFee').show();
-});
+}
 
+
+function sellingPriceHandler(){
+
+  var rfLength= $("#referralFees").val();
+
+    console.log("sellingPriceHandler function");
+
+    //pass selling price to calculateTax functin this will return tax value
+    var tax = calculateTax($("#sellingPrice").val());
+
+    //if tax value is not empty then set in total tax input field
+    if(stringEmptyChecker(tax)){
+        $("#total_tax").val(tax);    
+    }
+    
+    // debugger;
+    fixClosing();
+    Shipping_Charges();
+
+    if(rfLength.length>0){
+       referalPercentToPrice();
+    }
+   
+}
 
 
 function calculateProfit() {
@@ -145,70 +297,152 @@ function calculateProfit() {
 
 }
 
-function VolumetricCal() {
-    var length = $("#length").val();
-    var breadth = $("#breadth").val();
-    var height = $("#height").val();
+//This function will calculate volumetric weight calculation
+function VolumetricCalculation() {
+    var totalVolume,
+        length,
+        breadth,
+        height;
 
-    var totalVolume = (length * breadth * height) / 5000;
-    return $("#volumetricPrice").val(totalVolume);
-    // console.log(volum);
+    length = $("#length").val();
+    breadth = $("#breadth").val();
+    height = $("#height").val();
+    
+    if(stringEmptyChecker(length) == true && stringEmptyChecker(breadth) == true && stringEmptyChecker(height) == true){
+        
+        length = parseFloat(length).toFixed(2);
+        length = parseFloat(length);
+
+        breadth = parseFloat(breadth).toFixed(2);
+        breadth = parseFloat(breadth);
+
+        height = parseFloat(height).toFixed(2);
+        height = parseFloat(height);
+
+        totalVolume = (length * breadth * height) / 5000;
+
+        $("#volumetricPrice").val(totalVolume.toFixed(2));   
+    }
+
 }
 
-function CallculTax() {
-    var sp = $("#sellingPrice").val();
-    var tax_amt = (sp / 100) * 18;
-    $("#total_tax").val(tax_amt.toFixed(2));
-    // console.log(tax_amt);
-}
 
-function fixClos() {
-    var radioValueshippingtype = $("input[name='shippingType']:checked").val();
+function fixClosing() {
 
-    console.log(radioValueshippingtype);
+    //defining variables
+    var currentSelectedCategory,
+        radioValueshippingtype,
+        selectedCategoryFlag = false,
+        selectedCategory,
+        otherCategory,
+        productCategory,
+        sellingPrice,
+        from,
+        to,
+        a,
+        x;
 
-    if (radioValueshippingtype == 'easyShip' || radioValueshippingtype == 'selfShip') {
+    //getting value of shippingType radio button eg.fba or easy ship   
+    radioValueshippingtype = $("input[name='shippingType']:checked").val();
+    sellingPrice = parseFloat($("#sellingPrice").val());
 
-        var sellingPrice = convertToInt($("#sellingPrice").val());
-        var to, from;
+    console.log("shipping Type : " + radioValueshippingtype);
+
+    if(radioValueshippingtype == 'easyShip' || radioValueshippingtype == 'selfShip') {
+     // debugger;
+
         $.get("assets/data/amazon-easyShip-fixClosing.json", function(response, status) {
-            console.log(response);
-            var a = response.results;
-            console.log(a);
-            for ( i = 0; i < a.length; i++) {
+            // console.log(response);
+            a = response.results;
+            // console.log(a);
+            for(i = 0; i < a.length; i++){
                 
-                if (sellingPrice >= a[i].from && sellingPrice <=a[i].to) {
-                  console.log('hyy');
-                    var x = a[i].price;
-                    $('#fixClosingAmount').val(x);
-                    console.log(x);
-                    return x;
+                if (sellingPrice >= a[i].from && sellingPrice <= a[i].to) {
+                  // console.log('hyy');
+                    $('#fixClosingAmount').val(a[i].price);
+                    console.log("fix_clogin : "+ a[i].price);
+                    // return x;
                     break;
                 }
+
             }
+
         });
+
     }
-    else  {
-        var sellingPrice = convertToInt($("#sellingPrice").val());
-        var to, from;
+
+    else{
+     // debugger;
+        
         $.getJSON("/assets/data/amazon-fba-fixClosing.json", function(result) {
-            console.log(result);
-            var a = result.results;
+            // debugger;
+            // console.log(result);
+            a = result.results;
+
+            //loop on retrived data for local processing
             for (i = 0; i < a.length; i++) {
+
+                //in some cases "to" limit is eg. 1000 and above 
+                //means onward 1000rs fix closing will remain same
+                //hence in this situation we make to value more than selling price
+                //to bypass if logic written few lines below.
                 if (a[i].to === "above") {
                     to = sellingPrice + 1;
                 } else {
                     to = a[i].to;
                 }
+
                 from = a[i].from;
                 otherCategory = a[i].otherCategory;
                 selectedCategory = a[i].selectedCategory;
+
+                //if sellingPrice is between from and two then set fix closing value 
+                //accordingly 
                 if (sellingPrice >= from && sellingPrice <= to) {
-                    $('#fixClosingAmount').val(otherCategory);
+
+                    //get current product category
+                    productCategory = localStorage.getItem("productCategory");
+
+                    // debugger;
+
+                    //check this product is under selected cateogry or other category
+                    if(stringEmptyChecker(productCategory)){
+                        for(currentSelectedCategory in result.selectedCategories){
+                            //if prduct category is match with any selected category 
+                            //then set fixClosingAmoutn of selected category 
+                            //otherwise set to other category amount
+                            if($.trim(result.selectedCategories[currentSelectedCategory].toLowerCase()) ==  productCategory){
+                                $('#fixClosingAmount').val(selectedCategory);
+                                console.log('selectedCategory : ' + selectedCategory);
+                                //if current product is under selcted category then
+                                //make this below flag true otherwise default is false 
+                                //and exit the loop 
+                                selectedCategoryFlag = true;
+                                break;
+                            }
+                        }
+                        
+                        //if selectedCategoryFlag is false then product is under other category
+                        //and set value of fixClosingAmount to other category value or price
+                        if(!selectedCategoryFlag){
+                            $('#fixClosingAmount').val(otherCategory);
+                            console.log('otherCategory : ' + otherCategory);
+                        }
+
+                    }else{
+                        //for current just showing alert will develope this letter
+                        alert("Please select Product Categroy");                      
+                    }
+
+                    //checking whether user product is in selected category
+                    //or other category because both having different 
+                    //amount of fix closing
                     break;
                 }
+
             }
         });
+
     }
 
 }
@@ -219,9 +453,51 @@ function Shipping_Charges() {
     var shippingCharges = 0;
 
     var valueRange = $("input[name='shippingRange']:checked").val();
+     var radioValueshippingtype = $("input[name='shippingType']:checked").val();
+     console.log(radioValueshippingtype);
+    //console.log(valueRange);
 
-    $.get("assets/data/amazon-easyShip-shipping.json", function(response, status) {
-        fixClos();
+ if(radioValueshippingtype=="easyShip"){
+
+   $.get("assets/data/amazon-easyShip-shipping.json", function(response, status) {
+        
+        fixClosing();
+
+        //fbaFixClosing("amazon-fba-fixClosing.json", "#fixClosingAmount");
+        var len = response.results.length;
+        console.log(len);
+        for (var i = 0; i < len; i++) {
+            if (sp >= response.results[i].from && sp <= response.results[i].to) {
+                if (valueRange == "local") {
+                    shippingCharges = response.results[i].local;
+                    console.log(shippingCharges);
+                    $("#shippingCharges").val(shippingCharges);
+                    return shippingCharges;
+                    break;
+                } else if (valueRange == "regional") {
+                    shippingCharges = response.results[i].regional;
+                    console.log(shippingCharges);
+                    $("#shippingCharges").val(shippingCharges);
+                    return shippingCharges;
+                    break;
+                } else {
+                    shippingCharges = response.results[i].national;
+                    console.log(shippingCharges);
+                    $("#shippingCharges").val(shippingCharges);
+                    return shippingCharges;
+                    break;
+                }
+            }
+        }
+    });
+ }  
+
+ else if(radioValueshippingtype=="fba"){
+   //$("#nationalArea").prop("checked", true);
+  console.log("radioValueshippingtype==fba")
+   $.get("assets/data/amazon-fba-shipping.json", function(response, status) {
+        
+        fixClosing();
 
         //fbaFixClosing("amazon-fba-fixClosing.json", "#fixClosingAmount");
         var len = response.results.length;
@@ -251,30 +527,33 @@ function Shipping_Charges() {
         }
     });
 
+ }
+    
+
     // easyshipFixClosing();
 }
-;
-function fbaFixClosing(filename, selector) {
-    var sellingPrice = convertToInt($("#sellingPrice").val());
-    var to, from;
-    $.getJSON("/assets/data/" + filename, function(result) {
-        var a = result.results;
-        for (i = 0; i < a.length; i++) {
-            if (a[i].to === "above") {
-                to = sellingPrice + 1;
-            } else {
-                to = a[i].to;
-            }
-            from = a[i].from;
-            otherCategory = a[i].otherCategory;
-            selectedCategory = a[i].selectedCategory;
-            if (sellingPrice >= from && sellingPrice <= to) {
-                $(selector).val(otherCategory);
-                break;
-            }
-        }
-    });
-}
+
+// function fbaFixClosing(filename, selector) {
+//     var sellingPrice = parseFloat($("#sellingPrice").val());
+//     var to, from;
+//     $.getJSON("/assets/data/" + filename, function(result) {
+//         var a = result.results;
+//         for (i = 0; i < a.length; i++) {
+//             if (a[i].to === "above") {
+//                 to = sellingPrice + 1;
+//             } else {
+//                 to = a[i].to;
+//             }
+//             from = a[i].from;
+//             otherCategory = a[i].otherCategory;
+//             selectedCategory = a[i].selectedCategory;
+//             if (sellingPrice >= from && sellingPrice <= to) {
+//                 $(selector).val(otherCategory);
+//                 break;
+//             }
+//         }
+//     });
+// }
 
 function Shipping_Type() {
     var radioValueshippingtype = $("input[name='shippingType']:checked").val();
@@ -288,9 +567,7 @@ function Shipping_Type() {
         $(".fba").css("display", "none");
         $(".self_amaz").css("display", "block");
         document.getElementById('shippingCharges').readOnly = true;
-
     } else {
-
         $(".self_amaz").css("display", "none");
         document.getElementById('shippingCharges').readOnly = false;
         return 0;
@@ -328,15 +605,12 @@ function NewSellingP() {
 }
 
 // to set up new sellimg price call jason data here only 
-var abc = 20;
+
 function xyz() {
     $.get("assets/data/amazon-easyShip-shipping.json", function(response, status) {
         abc = response;
     });
 }
-xyz();
-
-
 
 //var p=0;
 
@@ -350,13 +624,9 @@ function desir_profit() {
     var d_profit = $("#total_profit1").val();
     var old_profit = $("#total_profit").val();
     var n_shipping = new_shipp(new_sp);
-
-    console.log(n_shipping);
-    console.log(n_fixclosing);
-
+    var new_pickpack=0;
     $("#shippingCharges1").val('-'+n_shipping);
 
-    
    // debugger;
     function new_fix() {
         var ship_type = $("input[name='shippingType']:checked").val();
@@ -365,11 +635,13 @@ function desir_profit() {
 
        // debugger;
         if (ship_type == "fba") {
-            var sellingPrice = convertToInt($("#sellingPrice1").val());
+        // debugger;
+        var sellingPrice = parseFloat($("#sellingPrice1").val());
         var to, from;
-        $.getJSON("/assets/data/amazon-fba-fixClosing.json", function(result) {
-            console.log(result);
-            var a = result.results;
+        console.log(fbxFixclosingValue);
+           
+            var a = fbxFixclosingValue.results;
+            console.log(a);
             for (i = 0; i < a.length; i++) {
                 if (a[i].to === "above") {
                     to = sellingPrice + 1;
@@ -381,19 +653,19 @@ function desir_profit() {
                 selectedCategory = a[i].selectedCategory;
                 if (sellingPrice >= from && sellingPrice <= to) {
                     $('#fixclosingCharges1').val('-'+otherCategory);
+                    return otherCategory;
                     break;
                 }
             }
-        });
+        
 
 
         } else {
          // debugger;
-        var sellingPrice = convertToInt($("#sellingPrice1").val());
+        var sellingPrice = parseFloat($("#sellingPrice1").val());
         var to, from;
-        $.get("assets/data/amazon-easyShip-fixClosing.json", function(response, status) {
-            console.log(response);
-            var a = response.results;
+        
+            var a = easyshipFixClosingValue.results;
             console.log(a);
             for ( i = 0; i < a.length; i++) {
                 
@@ -402,12 +674,11 @@ function desir_profit() {
                     var x = a[i].price;
                     $('#fixclosingCharges1').val('-'+x);
                     console.log(x);
-                    
                     return x;
                     break;
                 }
             }
-        });
+        
 
        // debugger;
         }
@@ -418,28 +689,35 @@ function desir_profit() {
 
 
     var n_fixclosing = new_fix();
+    
     console.log(n_fixclosing);
+    console.log(n_shipping);
 
     //debugger ;
     function new_shipp(new_sp) {
         console.log(abc);
         var sp = new_sp;
         var new_shipping = 0;
-        var ship_type = $("input[name='shippingRange']:checked").val();
+        var shippingRange = $("input[name='shippingRange']:checked").val();
         console.log(sp);
+        console.log(shippingRange);
+
+        var ship_type = $("input[name='shippingType']:checked").val();
         console.log(ship_type);
+        if(ship_type=="easyShip"){
 
         var len = abc.results.length;
         console.log(len);
 
         for (var i = 0; i < len; i++) {
             if (sp >= abc.results[i].from && sp <= abc.results[i].to) {
-                // debugger ;
-                if (ship_type == "local") {
+                 //debugger ;
+                if (shippingRange == "local") {
                     new_shipping = abc.results[i].local;
+                    console.log(new_shipping);
                     return new_shipping;
 
-                } else if (ship_type == "regional") {
+                } else if (shippingRange == "regional") {
                     new_shipping = abc.results[i].regional;
                     return new_shipping;
 
@@ -449,26 +727,85 @@ function desir_profit() {
                 }
             }
         }
+        }
+
+        else{
+        var len = fbashippingValue.results.length;
+        console.log(fbashippingValue);
+        console.log(len);
+        for( var i=0;i<len;i++){
+          if (sp >= fbashippingValue.results[i].from && sp <= fbashippingValue.results[i].to) {
+                 //debugger ;
+                if (shippingRange == "local") {
+                    new_shipping = fbashippingValue.results[i].local;
+                    console.log(new_shipping);
+                    return new_shipping;
+
+                } else if (shippingRange == "regional") {
+                    new_shipping = fbashippingValue.results[i].regional;
+                    return new_shipping;
+
+                } else {
+                    new_shipping = fbashippingValue.results[i].national;
+                    return new_shipping;
+                }
+            }   
+        }
+         
+          //return 50;
+        }
+
+        
 
     }
-
-}
-
-
-
-function ReferalFee() {
-  debugger;
-    var temp = $("#referralFees").val();
-    console.log(temp);
-    var sellingPrice = $("#sellingPrice").val();
-    console.log(sellingPrice);
-    var rf_fee = ((temp / 100) * sellingPrice);
-
-
-    console.log(rf_fee);
-    $("#referralFeesAmout").val(rf_fee);
-    debugger;
-     console.log(a);
-    return rf_fee;
     
+    //function to call new Pick and pack value call it only if FBA is selected ........................
+    var ship_type = $("input[name='shippingType']:checked").val();
+    console.log(ship_type);
+    if(ship_type=="fba"){
+
+    function new_pick_n_pack(){
+       var pickprice = 0;
+        var sp = $("#sellingPrice1").val();
+
+    if (sp <= 1000) {
+        var pickprice = 10;
+        return pickprice;
+    } else if (sp >= 1001 && sp <= 4999) {
+        var pickprice = 15;
+        return pickprice;
+    } else if (sp >= 5000 && sp <= 11999) {
+        var pickprice = 25;
+        return pickprice;
+    } else {
+        var pickprice = 50;
+        return pickprice;
+    }
+    }
+
+    var new_pickpack= new_pick_n_pack();
+    console.log(new_pickpack);
+  }
+
+
+    
+    function calculateNewValues(){
+       console.log("Buying Price= "+bp);
+       console.log("Selling Price= "+new_sp);
+       console.log("New Tax= "+new_tx);
+       console.log("New Shipping charge= "+n_shipping);
+       console.log("New Fix closing= "+n_fixclosing);
+       console.log("New Referal= "+new_rf);
+       //.......To be calculated the fun ction is yet to be written...
+       console.log("New Pick and pack= "+new_pickpack); 
+
+       var newAmazonFee=parseInt(new_tx)+parseInt(new_rf)+parseInt(n_fixclosing)+parseInt(new_pickpack);
+       console.log("New amazon fee = "+newAmazonFee)
+    }
+
+    calculateNewValues();
+
+   
+
 }
+
