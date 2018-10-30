@@ -458,6 +458,7 @@ function Shipping_Charges() {
     //console.log(valueRange);
 
  if(radioValueshippingtype=="easyShip"){
+  // $("#nationalArea").prop("checked", true);
 
    $.get("assets/data/amazon-easyShip-shipping.json", function(response, status) {
         
@@ -484,6 +485,7 @@ function Shipping_Charges() {
                     shippingCharges = response.results[i].national;
                     console.log(shippingCharges);
                     $("#shippingCharges").val(shippingCharges);
+                    $("#nationalArea").prop("checked", true);
                     return shippingCharges;
                     break;
                 }
@@ -493,7 +495,7 @@ function Shipping_Charges() {
  }  
 
  else if(radioValueshippingtype=="fba"){
-   //$("#nationalArea").prop("checked", true);
+  // $("#nationalArea").prop("checked", true);
   console.log("radioValueshippingtype==fba")
    $.get("assets/data/amazon-fba-shipping.json", function(response, status) {
         
@@ -520,6 +522,7 @@ function Shipping_Charges() {
                     shippingCharges = response.results[i].national;
                     console.log(shippingCharges);
                     $("#shippingCharges").val(shippingCharges);
+                    $("#nationalArea").prop("checked", true);
                     return shippingCharges;
                     break;
                 }
@@ -616,7 +619,7 @@ function xyz() {
 
 function desir_profit() {
     console.log("inside new desir_profit");
-    var bp = $("#buyingPrice1").val();
+    var bp = $("#buyingPrice").val();
     var new_sp = $("#sellingPrice1").val();
     var rf = $("#referralFees").val();
     var new_rf = (rf / 100) * new_sp;
@@ -625,6 +628,7 @@ function desir_profit() {
     var old_profit = $("#total_profit").val();
     var n_shipping = new_shipp(new_sp);
     var new_pickpack=0;
+    var oldShipping=$("#shippingCharges1").val();
     $("#shippingCharges1").val('-'+n_shipping);
 
    // debugger;
@@ -638,10 +642,10 @@ function desir_profit() {
         // debugger;
         var sellingPrice = parseFloat($("#sellingPrice1").val());
         var to, from;
-        console.log(fbxFixclosingValue);
+        //console.log(fbxFixclosingValue);
            
             var a = fbxFixclosingValue.results;
-            console.log(a);
+           // console.log(a);
             for (i = 0; i < a.length; i++) {
                 if (a[i].to === "above") {
                     to = sellingPrice + 1;
@@ -666,7 +670,7 @@ function desir_profit() {
         var to, from;
         
             var a = easyshipFixClosingValue.results;
-            console.log(a);
+           // console.log(a);
             for ( i = 0; i < a.length; i++) {
                 
                 if (sellingPrice >= a[i].from && sellingPrice <=a[i].to) {
@@ -685,9 +689,6 @@ function desir_profit() {
 
     }
 
-
-
-
     var n_fixclosing = new_fix();
     
     console.log(n_fixclosing);
@@ -695,7 +696,7 @@ function desir_profit() {
 
     //debugger ;
     function new_shipp(new_sp) {
-        console.log(abc);
+        //console.log(abc);
         var sp = new_sp;
         var new_shipping = 0;
         var shippingRange = $("input[name='shippingRange']:checked").val();
@@ -704,6 +705,8 @@ function desir_profit() {
 
         var ship_type = $("input[name='shippingType']:checked").val();
         console.log(ship_type);
+
+
         if(ship_type=="easyShip"){
 
         var len = abc.results.length;
@@ -729,7 +732,7 @@ function desir_profit() {
         }
         }
 
-        else{
+        else if(ship_type=="fba") {
         var len = fbashippingValue.results.length;
         console.log(fbashippingValue);
         console.log(len);
@@ -755,7 +758,11 @@ function desir_profit() {
           //return 50;
         }
 
-        
+        else{
+         var oldShipping=$("#shippingCharges").val();
+         new_shipping= oldShipping
+         return new_shipping;
+        }
 
     }
     
@@ -763,11 +770,9 @@ function desir_profit() {
     var ship_type = $("input[name='shippingType']:checked").val();
     console.log(ship_type);
     if(ship_type=="fba"){
-
     function new_pick_n_pack(){
        var pickprice = 0;
         var sp = $("#sellingPrice1").val();
-
     if (sp <= 1000) {
         var pickprice = 10;
         return pickprice;
@@ -790,17 +795,33 @@ function desir_profit() {
 
     
     function calculateNewValues(){
+      var newProfit=0;
+      var newTotaldeduction=0;
        console.log("Buying Price= "+bp);
        console.log("Selling Price= "+new_sp);
        console.log("New Tax= "+new_tx);
        console.log("New Shipping charge= "+n_shipping);
        console.log("New Fix closing= "+n_fixclosing);
        console.log("New Referal= "+new_rf);
-       //.......To be calculated the fun ction is yet to be written...
-       console.log("New Pick and pack= "+new_pickpack); 
-
+       console.log("New Pick and pack= "+new_pickpack);
        var newAmazonFee=parseInt(new_tx)+parseInt(new_rf)+parseInt(n_fixclosing)+parseInt(new_pickpack);
-       console.log("New amazon fee = "+newAmazonFee)
+       console.log("New amazon fee = "+newAmazonFee);
+       newTotaldeduction=parseInt(newAmazonFee)+parseInt(bp)+parseInt(n_shipping);
+       console.log("Total deductions "+newTotaldeduction);
+       newProfit=new_sp-bp-newAmazonFee-n_shipping;
+       console.log("Total Profit "+newProfit);
+
+
+       $("#amazon_feees1").val('-'+newAmazonFee.toFixed(2));
+       $("#referalCharges1").val('-'+new_rf.toFixed(2));
+       $("#fixclosingCharges1").val('-'+n_fixclosing.toFixed(2));
+       $("#gst").val('-'+new_tx.toFixed(2));
+       $("#picknpack_charge").val('-'+new_pickpack.toFixed(2));
+       $("#total_deductions1").val('-'+newTotaldeduction.toFixed(2));
+       $("#total_profit2").val(newProfit.toFixed(2));
+       $("#total_profit1").val(newProfit.toFixed(2));
+
+       
     }
 
     calculateNewValues();
