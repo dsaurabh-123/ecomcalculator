@@ -20,6 +20,7 @@ window.onload = function(e) {
    easyshipShipping();
    fbxFixclosing();
    easyshipFixClosing();
+   
 };
 
 //calling all jason values here so that we can use it later..........................................................
@@ -47,7 +48,6 @@ function fbxFixclosing(){
              // console.log(response);
             fbxFixclosingValue = response;
             // console.log(a);
-
         });
 
 }
@@ -60,9 +60,9 @@ function easyshipFixClosing(){
             // console.log(a);
 
         });
-
-
 }
+
+
 
 //ends here ..........................................................................................................
 
@@ -153,6 +153,22 @@ function referalPercentToPrice(){
         $("#referralFeesAmout").val(referalAmount.toFixed(2));
     }
     
+
+    //when user enters any input it should be checked whether the same value is present for others to 
+    checkCategory();
+    function checkCategory(){
+      //console.log(referalPercentage);
+
+      $.get("assets/data/amazon-referal-fees.json", function(response, status){
+        //console.log(response);
+        var len=response.results.length;
+        for(var i=0; i<len;i++){
+          if(referalPercentage==response.results[i].id){
+            console.log(response.results[i].text);
+          }
+        }
+      });
+    }
 }
 
 
@@ -457,7 +473,7 @@ function Shipping_Charges() {
      console.log(radioValueshippingtype);
     //console.log(valueRange);
 
- if(radioValueshippingtype=="easyShip"){
+ if(radioValueshippingtype=="easyShip" || radioValueshippingtype=="selfShip"){
   // $("#nationalArea").prop("checked", true);
 
    $.get("assets/data/amazon-easyShip-shipping.json", function(response, status) {
@@ -571,6 +587,7 @@ function Shipping_Type() {
         $(".self_amaz").css("display", "block");
         document.getElementById('shippingCharges').readOnly = true;
     } else {
+        $(".fba").css("display", "none");
         $(".self_amaz").css("display", "none");
         document.getElementById('shippingCharges').readOnly = false;
         return 0;
@@ -821,12 +838,8 @@ function desir_profit() {
        $("#total_profit2").val(newProfit.toFixed(2));
        $("#total_profit1").val(newProfit.toFixed(2));
 
-       
-    }
-
+       }
     calculateNewValues();
-
-   
 
 }
 
