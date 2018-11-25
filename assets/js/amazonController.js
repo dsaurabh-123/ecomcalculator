@@ -152,13 +152,16 @@ function referalPercentToPrice(){
         //setter
         $("#referralFeesAmout").val(referalAmount.toFixed(2));
     }
+
+
+    calculateProfit();
     
+
 
     //when user enters any input it should be checked whether the same value is present for others to 
     checkCategory();
     function checkCategory(){
       //console.log(referalPercentage);
-
       $.get("assets/data/amazon-referal-fees.json", function(response, status){
         //console.log(response);
         var len=response.results.length;
@@ -178,6 +181,7 @@ function referalFeesBtnHandler(){
     modalDropdownShow();
     $('.fixclosingFee').hide();
     $('.referelfeesDropdown').show();
+
 }
 
 function fixClosingBtnHandler() {
@@ -244,10 +248,11 @@ function sellingPriceHandler(){
     
     // debugger;
     fixClosing();
-    Shipping_Charges();
+   // Shipping_Charges();
 
     if(rfLength.length>0){
        referalPercentToPrice();
+     
     }
    
 }
@@ -286,6 +291,8 @@ function calculateProfit() {
     // debugger;
     if (profit < 0) {
         $("#profiBtn, #total_profit").css("background", "#db3951");
+        $(".profit_class").css("background","#db3951");
+
     } else {
         $("#profiBtn, #total_profit").css("background", "#53d397");
     }
@@ -340,6 +347,7 @@ function VolumetricCalculation() {
         $("#volumetricPrice").val(totalVolume.toFixed(2));   
     }
 
+  Shipping_Charges();
 }
 
 
@@ -465,7 +473,7 @@ function fixClosing() {
 
 function Shipping_Charges() {
 
-    var sp = $("#sellingPrice").val();
+    var sp = $("#volumetricPrice").val();
     var shippingCharges = 0;
 
     var valueRange = $("input[name='shippingRange']:checked").val();
@@ -487,22 +495,29 @@ function Shipping_Charges() {
             if (sp >= response.results[i].from && sp <= response.results[i].to) {
                 if (valueRange == "local") {
                     shippingCharges = response.results[i].local;
-                    console.log(shippingCharges);
-                    $("#shippingCharges").val(shippingCharges);
-                    return shippingCharges;
+                    var shiptax=shippingCharges*(18/100);
+                    console.log(shippingCharges+shipwithtax);
+                    var shipwithtax=shippingCharges+shiptax;
+                    $("#shippingCharges").val(shipwithtax);
+                    return shipwithtax;
                     break;
                 } else if (valueRange == "regional") {
                     shippingCharges = response.results[i].regional;
-                    console.log(shippingCharges);
-                    $("#shippingCharges").val(shippingCharges);
-                    return shippingCharges;
+                    var shiptax=shippingCharges*(18/100);
+                    console.log(shippingCharges+shipwithtax);
+                    var shipwithtax=shippingCharges+shiptax;
+                    $("#shippingCharges").val(shipwithtax);
+                    return shipwithtax;
                     break;
                 } else {
                     shippingCharges = response.results[i].national;
-                    console.log(shippingCharges);
-                    $("#shippingCharges").val(shippingCharges);
+                    var shiptax=shippingCharges*(18/100);
+                    console.log(shippingCharges+shipwithtax);
+                    var shipwithtax=shippingCharges+shiptax;
+                    
+                    $("#shippingCharges").val(shipwithtax);
                     $("#nationalArea").prop("checked", true);
-                    return shippingCharges;
+                    return shipwithtax;
                     break;
                 }
             }
@@ -524,20 +539,26 @@ function Shipping_Charges() {
             if (sp >= response.results[i].from && sp <= response.results[i].to) {
                 if (valueRange == "local") {
                     shippingCharges = response.results[i].local;
-                    console.log(shippingCharges);
-                    $("#shippingCharges").val(shippingCharges);
+                    var shiptax=shippingCharges*(18/100);
+                    console.log(shippingCharges+shipwithtax);
+                    var shipwithtax=shippingCharges+shiptax;
+                    $("#shippingCharges").val(shipwithtax);
                     return shippingCharges;
                     break;
                 } else if (valueRange == "regional") {
                     shippingCharges = response.results[i].regional;
-                    console.log(shippingCharges);
-                    $("#shippingCharges").val(shippingCharges);
+                    var shiptax=shippingCharges*(18/100);
+                    console.log(shippingCharges+shipwithtax);
+                    var shipwithtax=shippingCharges+shiptax;
+                    $("#shippingCharges").val(shipwithtax);
                     return shippingCharges;
                     break;
                 } else {
                     shippingCharges = response.results[i].national;
-                    console.log(shippingCharges);
-                    $("#shippingCharges").val(shippingCharges);
+                    var shiptax=shippingCharges*(18/100);
+                    console.log(shippingCharges+shipwithtax);
+                    var shipwithtax=shippingCharges+shiptax;
+                    $("#shippingCharges").val(shipwithtax);
                     $("#nationalArea").prop("checked", true);
                     return shippingCharges;
                     break;
@@ -553,7 +574,7 @@ function Shipping_Charges() {
 }
 
 // function fbaFixClosing(filename, selector) {
-//     var sellingPrice = parseFloat($("#sellingPrice").val());
+//     var volumetricPrice = parseFloat($("#sellingPrice").val());
 //     var to, from;
 //     $.getJSON("/assets/data/" + filename, function(result) {
 //         var a = result.results;
