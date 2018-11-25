@@ -1,9 +1,12 @@
+
 //global data variables
 var gD = {};//empty object for global data
 //caching variables
 var gV = {};
 // Global class
 var gC = {};
+
+const GST = 18;
 
 $(document).ready(function() {
 	
@@ -54,31 +57,6 @@ $(document).on("click", "#menu_trigger", function(){
 	menuToggler();
 });
 
-// when click onn refereal fees button open
-$(document).on("click", "#referalFeesBtn", function(){
-	getJsonData("amazon-referal-fees.json", "#referalFees");
-	$('#referalFees').select2();
-	modalDropdownShow();
-	$('.fixclosingFee').hide();
-	$('.referelfeesDropdown').show();
-});
-
-$(document).on("change", "#referralFees", referalPercentToPrice)
-
-function referalPercentToPrice(){
-	var referalPercentage = $("#referralFees").val();
-	var sellingPrice = $("#sellingPrice").val();
-	var output = sellingPrice / referalPercentage;
-	$("#referralFeesAmout").val(output.toFixed(2));
-}
-
-//when click on referelfees button
-$(document).on("change", "#referalFees", function(){
-	modalDropdownHide();
-	$("#referralFees").val(parseFloat($("#referalFees").val()));
-	referalPercentToPrice();
-});
-
 //when click on referelfees button
 $(document).on("click", "#close_dropdown", function(){
 	modalDropdownHide();
@@ -117,6 +95,38 @@ function menuToggler(){
 	}
 }
 
-function convertToInt(value) {
-	return parseFloat(value);
+
+//This function is useds for variable empty & undefined check
+function stringEmptyChecker(string){
+	if(string == "" || typeof string === "undefined" ||  string == null){
+		return false;
+	}else{
+		return true;
+	}
+}
+
+
+//This function is used to calculate Tax ammount
+function calculateTax(parameter) {
+	var taxAmount;
+
+    //basic empty and null check
+    if(stringEmptyChecker(parameter)){
+        //if variable is not empty then convert it to numberic if it is in string
+        parameter = parseInt(parameter);
+    }else{
+        //else stop function execution here
+        return;
+    }
+
+    //formula for gst calculatin standard value is 18%
+    //GST is global vaiable set in custom js
+    taxAmount = (parameter / 100) * GST;
+
+    //will fix value to only 2 digits after point
+    taxAmount = parseFloat(taxAmount.toFixed(2));
+
+    console.log("tax amount is :" + taxAmount);
+
+    return taxAmount;
 }
