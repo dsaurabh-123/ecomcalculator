@@ -97,7 +97,8 @@ $(document).on("change", "#referralFees", referalPercentToPrice)
 //THis event trigger when dropdown on modal get selected 
 $(document).on("change", "#referalFees", referalFeesHandler);
 
-
+//when actual volumetric is changed 
+$(document).on("change", "#actualVolume", desir_profit);
 
 
 function referalFeesHandler(){
@@ -344,7 +345,9 @@ function VolumetricCalculation() {
 
         totalVolume = (length * breadth * height) / 5000;
 
-        $("#volumetricPrice").val(totalVolume.toFixed(2));   
+        var volume=totalVolume*1000;
+
+        $("#volumetricPrice").val(volume.toFixed(2));   
     }
 
   Shipping_Charges();
@@ -472,8 +475,27 @@ function fixClosing() {
 }
 
 function Shipping_Charges() {
+    var sp='';
 
-    var sp = $("#volumetricPrice").val();
+    var calcVolume = $("#volumetricPrice").val();
+    var actuVolume = $("#actualVolume").val();
+
+    if(calcVolume>actuVolume){
+      
+      console.log(calcVolume);
+      console.log(actuVolume);
+     sp=calcVolume;
+     console.log(sp);
+   }
+    else{
+       console.log(calcVolume);
+      console.log(actuVolume);
+      sp=actuVolume;
+      console.log(sp);
+    }
+
+  
+
     var shippingCharges = 0;
 
     var valueRange = $("input[name='shippingRange']:checked").val();
@@ -847,6 +869,19 @@ function desir_profit() {
        newTotaldeduction=parseInt(newAmazonFee)+parseInt(bp)+parseInt(n_shipping);
        console.log("Total deductions "+newTotaldeduction);
        newProfit=new_sp-bp-newAmazonFee-n_shipping;
+
+       if (newProfit < 0) {
+          
+        $("#profiBtn, #total_profit").css("background", "#db3951");
+        $(".profit_class").css("background","#db3951");
+
+        } else {
+          console.log('hyy');
+       // $("#profiBtn, #total_profit").css("background", "#53d397");
+        $(".profit_class").css("background","#7ac37a");
+        }
+
+
        console.log("Total Profit "+newProfit);
 
 
@@ -859,7 +894,9 @@ function desir_profit() {
        $("#total_profit2").val(newProfit.toFixed(2));
        $("#total_profit1").val(newProfit.toFixed(2));
 
+        
        }
+
     calculateNewValues();
 
 }
