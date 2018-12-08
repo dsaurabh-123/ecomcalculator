@@ -154,10 +154,9 @@ function referalPercentToPrice(){
         $("#referralFeesAmout").val(referalAmount.toFixed(2));
     }
 
+    calculatetax();
 
     calculateProfit();
-    
-
 
     //when user enters any input it should be checked whether the same value is present for others to 
     checkCategory();
@@ -174,6 +173,35 @@ function referalPercentToPrice(){
       });
     }
 }
+
+
+function calculatetax(){
+  console.log('Calculation of amazon ka tax');
+  //var picknPackAmount=0;
+  var referalfee=$("#referralFeesAmout").val();
+  var FixclosingAmount=$("#fixClosingAmount").val();
+  var picknPackAmount=$("#picknPack").val();
+  var tax=0;
+  console.log(picknPackAmount);
+ 
+  var valueRange = $("input[name='shippingRange']:checked").val();
+  var radioValueshippingtype = $("input[name='shippingType']:checked").val();
+  console.log(radioValueshippingtype);
+    //console.log(valueRange);
+
+ if(radioValueshippingtype=="easyShip" || radioValueshippingtype=="selfShip"){
+  var picknPackAmount=0;
+  console.log(picknPackAmount);
+ } 
+
+ var total=parseInt(referalfee)+parseInt(FixclosingAmount)+parseInt(picknPackAmount);
+ console.log(total);
+ tax=((18/100)*total);
+ console.log(tax);
+
+ $("#total_tax").val(tax.toFixed(2));
+
+};
 
 
 function referalFeesBtnHandler(){
@@ -240,12 +268,12 @@ function sellingPriceHandler(){
     console.log("sellingPriceHandler function");
 
     //pass selling price to calculateTax functin this will return tax value
-    var tax = calculateTax($("#sellingPrice").val());
+    // var tax = calculateTax($("#sellingPrice").val());
 
-    //if tax value is not empty then set in total tax input field
-    if(stringEmptyChecker(tax)){
-        $("#total_tax").val(tax);    
-    }
+    // //if tax value is not empty then set in total tax input field
+    // if(stringEmptyChecker(tax)){
+    //     $("#total_tax").val(tax);    
+    // }
     
     // debugger;
     fixClosing();
@@ -316,8 +344,8 @@ function calculateProfit() {
 
     $("#profit_loss_desc").css("display", "block");
 
-    console.log(amazon_fee);
-    console.log(total_deductions);
+    // console.log(amazon_fee);
+    // console.log(total_deductions);
 
 }
 
@@ -683,6 +711,7 @@ function desir_profit() {
     var new_sp = $("#sellingPrice1").val();
     var rf = $("#referralFees").val();
     var new_rf = (rf / 100) * new_sp;
+
     var new_tx = (18 / 100) * new_sp;
     var d_profit = $("#total_profit1").val();
     var old_profit = $("#total_profit").val();
@@ -859,6 +888,10 @@ function desir_profit() {
       var newTotaldeduction=0;
        console.log("Buying Price= "+bp);
        console.log("Selling Price= "+new_sp);
+
+      var totalAmazonAmount=parseInt(new_rf)+parseInt(n_fixclosing)+parseInt(new_pickpack);
+     var new_tx = (18 / 100) * totalAmazonAmount;
+
        console.log("New Tax= "+new_tx);
        console.log("New Shipping charge= "+n_shipping);
        console.log("New Fix closing= "+n_fixclosing);
