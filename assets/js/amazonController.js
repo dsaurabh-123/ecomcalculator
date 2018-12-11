@@ -167,6 +167,14 @@ function referalPercentToPrice(){
         var len=response.results.length;
         for(var i=0; i<len;i++){
           if(referalPercentage==response.results[i].id){
+
+            $("#rfDropdownModal").modal("show");
+
+             for(var x=0;x>len;x++){
+              
+              console.log(response.results[i].text);
+            rfDropdown.innerHTML +='<a class="dropdown-item" href="#">'+response.results[i].text+'</a>'
+  }    
             console.log(response.results[i].text);
           }
         }
@@ -890,7 +898,7 @@ function desir_profit() {
        console.log("Selling Price= "+new_sp);
 
       var totalAmazonAmount=parseInt(new_rf)+parseInt(n_fixclosing)+parseInt(new_pickpack);
-     var new_tx = (18 / 100) * totalAmazonAmount;
+      var new_tx = (18 / 100) * totalAmazonAmount;
 
        console.log("New Tax= "+new_tx);
        console.log("New Shipping charge= "+n_shipping);
