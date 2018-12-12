@@ -923,3 +923,71 @@ function desir_profit() {
     calculateNewValues();
 
 }
+
+
+
+
+// for guide on screen ---
+
+dataguide = [
+{
+id : "buyingPrice",
+message : "Please enter buying price",
+nextId : "SellingPrice" 
+},
+{
+id : "sellingPrice",
+message : "Please enter selling price",
+// nextId : "SellingPrice",
+nextClass:"shippingType" 
+},
+{
+class : "shippingType",
+message : "Choose shipping type",
+nextId : "length",
+},
+{
+id : "length",
+message : "Enter length",
+nextId : "breadth",
+},
+{
+id : "breadth",
+message : "Enter breadth",
+nextId : "height",
+},
+{
+id : "height",
+message : "Enter height",
+nextId : "actualVolume",
+},
+{
+id : "actualVolume",
+message : "Enter Actual Vloume",
+nextClass : "customCheckbox",
+},
+{
+class : "customCheckbox",
+message : "Select Region",
+nextId : "referralFees",
+},
+{
+id : "referralFees",
+message : "Choose Referal Category",
+nextId : "total_profit",
+},
+{
+id : "total_profit",
+message : "Click to check deductions",
+nextId : "#",
+},
+]
+
+
+$(document).ready(function() {
+
+  document.getElementById("buyingPrice").focus();
+
+});
+
+
