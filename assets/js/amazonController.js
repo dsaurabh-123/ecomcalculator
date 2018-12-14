@@ -2,8 +2,7 @@
 app.controller("amazonController", function($scope, $http) {});
 
 $(document).ready(function() {
-
-    // //DECLARING flobal variables ..............................................................................
+//DECLARING flobal variables ..............................................................................
     var abc = 20;
     var fbashippingValue = 0;
     var easyshipShippingValue = 0;
@@ -20,9 +19,8 @@ window.onload = function(e) {
     easyshipShipping();
     fbxFixclosing();
     easyshipFixClosing();
-
-}
-;
+    
+};
 
 //calling all jason values here so that we can use it later..........................................................
 
@@ -62,6 +60,51 @@ function easyshipFixClosing() {
 
     });
 }
+
+//Focus here..................
+$(document).on("focus", "#sellingPrice", sell);
+
+function sell(){
+  var selectedTextArea = document.activeElement.id;
+  console.log(selectedTextArea);
+  document.getElementById("guide").innerHTML = "Enter Selling Price";
+}
+
+
+$(document).on("focus", "#buyingPrice", buy);
+
+function buy(){
+  var selectedTextArea = document.activeElement.id;
+  console.log(selectedTextArea);
+  document.getElementById("guide").innerHTML = "Enter Buying Price";
+}
+
+
+$(document).on("focus", "#length", length);
+
+function length(){
+  var selectedTextArea = document.activeElement.id;
+  console.log(selectedTextArea);
+  document.getElementById("guide").innerHTML = "Enter Length";
+}
+
+$(document).on("focus", "#breadth", breadth);
+
+function breadth(){
+  var selectedTextArea = document.activeElement.id;
+  console.log(selectedTextArea);
+  document.getElementById("guide").innerHTML = "Enter breadth";
+}
+
+
+$(document).on("focus", "#height", height);
+
+function height(){
+  var selectedTextArea = document.activeElement.id;
+  console.log(selectedTextArea);
+  document.getElementById("guide").innerHTML = "Enter height";
+}
+
 
 //ends here ..........................................................................................................
 
@@ -195,10 +238,6 @@ function referalPercentToPrice() {
 
 }
 
-
-   
-
-
 function calculatetax() {
     console.log('Calculation of amazon ka tax');
     //var picknPackAmount=0;
@@ -284,20 +323,9 @@ function fixClosingBtnHandler() {
 }
 
 function sellingPriceHandler() {
-
     var rfLength = $("#referralFees").val();
 
     console.log("sellingPriceHandler function");
-
-    //pass selling price to calculateTax functin this will return tax value
-    // var tax = calculateTax($("#sellingPrice").val());
-
-    // //if tax value is not empty then set in total tax input field
-    // if(stringEmptyChecker(tax)){
-    //     $("#total_tax").val(tax);    
-    // }
-
-    // debugger;
     fixClosing();
     // Shipping_Charges();
 
@@ -305,6 +333,8 @@ function sellingPriceHandler() {
         referalPercentToPrice();
 
     }
+
+    document.getElementById("guide").innerHTML = "Choose Shipping Type";
 
 }
 
@@ -492,7 +522,9 @@ function fixClosing() {
 
                     } else {
                         //for current just showing alert will develope this letter
-                        alert("Please select Product Categroy");
+
+                        console.log('Please select Product Categroy isko dekhna haii')
+                        //alert("Please select Product Categroy");
                     }
 
                     //checking whether user product is in selected category
@@ -624,28 +656,6 @@ function Shipping_Charges() {
     // easyshipFixClosing();
 }
 
-// function fbaFixClosing(filename, selector) {
-//     var volumetricPrice = parseFloat($("#sellingPrice").val());
-//     var to, from;
-//     $.getJSON("/assets/data/" + filename, function(result) {
-//         var a = result.results;
-//         for (i = 0; i < a.length; i++) {
-//             if (a[i].to === "above") {
-//                 to = sellingPrice + 1;
-//             } else {
-//                 to = a[i].to;
-//             }
-//             from = a[i].from;
-//             otherCategory = a[i].otherCategory;
-//             selectedCategory = a[i].selectedCategory;
-//             if (sellingPrice >= from && sellingPrice <= to) {
-//                 $(selector).val(otherCategory);
-//                 break;
-//             }
-//         }
-//     });
-// }
-
 function Shipping_Type() {
     var radioValueshippingtype = $("input[name='shippingType']:checked").val();
     console.log(radioValueshippingtype);
@@ -664,7 +674,9 @@ function Shipping_Type() {
         document.getElementById('shippingCharges').readOnly = false;
         return 0;
     }
-
+    
+    document.getElementById("guide").innerHTML = "Enter Length";
+    document.getElementById("length").focus();
 }
 
 function PicknPack() {
@@ -696,7 +708,7 @@ function NewSellingP() {
 
 }
 
-// to set up new sellimg price call jason data here only 
+// to set up new selling price call jason data here only 
 
 function xyz() {
     $.get("assets/data/amazon-easyShip-shipping.json", function(response, status) {
@@ -704,7 +716,6 @@ function xyz() {
     });
 }
 
-//var p=0;
 
 function desir_profit() {
     console.log("inside new desir_profit");
@@ -925,8 +936,6 @@ function desir_profit() {
 }
 
 
-
-
 // for guide on screen ---
 
 dataguide = [
@@ -938,7 +947,6 @@ nextId : "SellingPrice"
 {
 id : "sellingPrice",
 message : "Please enter selling price",
-// nextId : "SellingPrice",
 nextClass:"shippingType" 
 },
 {
@@ -984,10 +992,11 @@ nextId : "#",
 ]
 
 
-$(document).ready(function() {
+function getguide(){
+ document.getElementById("guide").innerHTML = "Paragraph changed!";
 
-  document.getElementById("buyingPrice").focus();
+}
 
-});
+ 
 
 
