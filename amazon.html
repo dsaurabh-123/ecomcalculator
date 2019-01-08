@@ -44,7 +44,7 @@
             Price
           </div>
           <div class="col-4">
-            <input type="number" name="buyingPrice" id="buyingPrice" value="" class=""  />
+            <input type="number" name="buyingPrice" id="buyingPrice" value="" class="buyingprice"  autofocus />
           </div>
           <div class="col-2">
             &#8377; 
@@ -146,7 +146,7 @@
                   Actual
                 </div>
                 <div class="col-4">
-                  <input type="number" name="sellingPrice" id="sellingPrice" class="" />
+                  <input type="number" name="" id="actualVolume" class="" />
                 </div>
                 <div class="col-2">
                   gm
@@ -748,6 +748,37 @@
 
 
        <!-- ends here ........... -->
+
+
+
+      <!--  IF RF typed has many category eg 5% so a dropdown will open  -->
+<!-- Modal -->
+<div class="modal fade" id="rfDropdownModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content modal_modified">
+      <div class="modal-header modal_head_modified">
+        <h6 class="modal-title" id="exampleModalLabel">Choose</h6>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body modal_modified">
+    
+    <div class="dropdown">
+  <ul class="btn  dropdown-toggle"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"        aria-expanded="true" style="width: 100%">&nbsp;</ul>
+  <div class="dropdown-menu rdropdownmodified " aria-labelledby="dropdownMenuButton" id="rfDropdown">
+       <!-- <div id="rfDropdown"></div> -->
+  </div>
+</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--       Ends here  -->
+
+
 
         <div class="col-12">&nbsp;</div>
 
