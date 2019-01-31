@@ -1,0 +1,109 @@
+{
+    "results" :[ 
+        {
+            "type": ["none"],
+            "data": [
+                {
+                    "selector": "buyingPrice",
+                    "message": "Please enter buying price",
+                    "nextSelector": "sellingPrice"
+                },
+                {
+                    "selector": "sellingPrice",
+                    "message": "Please enter selling price",
+                    "nextSelector": "shippingType"
+                }
+            ]
+        },
+        {
+            "type": ["fba", "easyShip"],
+            "data": [
+                {
+                    "selector": "buyingPrice",
+                    "message": "Please enter buying price",
+                    "nextSelector": "sellingPrice"
+                },
+                {
+                    "selector": "sellingPrice",
+                    "message": "Please enter selling price",
+                    "nextSelector": "shippingType"
+                },
+                {
+                    "selector": "shippingType",
+                    "message": "Choose shipping type",
+                    "nextSelector": "length"
+                },
+                {
+                    "selector": "length",
+                    "message": "Enter length (Optional)",
+                    "nextSelector": "breadth"
+                },
+                {
+                    "selector": "breadth",
+                    "message": "Enter breadth (Optional)",
+                    "nextSelector": "height"
+                },
+                {
+                    "selector": "height",
+                    "message": "Enter height (Optional)",
+                    "nextSelector": "actualVolume"
+                },
+                {
+                    "selector": "actualVolume",
+                    "message": "Enter Actual Vloume (Optional)",
+                    "nextSelector": "shippingRange"
+                },
+                {
+                    "selector": "shippingRange",
+                    "message": "Select Delivery Type (Local, Regional, National)",
+                    "nextSelector": "referralFees"
+                },
+                {
+                    "selector": "referralFees",
+                    "message": "Choose Referral Category",
+                    "nextSelector": "total_profit"
+                },
+                {
+                    "selector": "total_profit",
+                    "message": "Click to check deductions",
+                    "nextSelector": ""
+                }
+            ]
+        },
+        {
+            "type": ["selfShip"],
+            "data": [
+                {
+                    "selector": "buyingPrice",
+                    "message": "Please enter buying price",
+                    "nextSelector": "sellingPrice"
+                },
+                {
+                    "selector": "sellingPrice",
+                    "message": "Please enter selling price",
+                    "nextSelector": "shippingType"
+                },
+                {
+                    "selector": "shippingType",
+                    "message": "Choose shipping type",
+                    "nextSelector": "shippingCharges"
+                },
+                {
+                    "selector": "shippingCharges",
+                    "message": "Enter shipping charges",
+                    "nextSelector": "referralFees"
+                },
+                {
+                    "selector": "referralFees",
+                    "message": "Choose Referal Category",
+                    "nextSelector": "total_profit"
+                },
+                {
+                    "selector": "total_profit",
+                    "message": "Click to check deductions",
+                    "nextSelector": ""
+                }
+            ]
+        }
+    ]
+}

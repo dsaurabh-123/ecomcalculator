@@ -5,47 +5,54 @@
     <title>ECOM CALULATOR</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <!-- FontAwesome CSS -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">
+
     <!-- Latest compiled and minified CSS -->
-    <link href="https://fonts.googleapis.com/css?family=Questrial" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css">
-    <link rel="stylesheet" href="assets/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="assets/css/animate.css">
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Questrial" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css" />
+    <link rel="stylesheet" href="assets/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" />
+    <!-- <link rel="stylesheet" href="assets/plugins/fontAwesome/all.css" /> -->
+    <link rel="stylesheet" href="assets/plugins/select2/select2.min.css" />
+
+    <link rel="stylesheet" href="assets/css/animate.css" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <link rel="stylesheet" href="assets/css/responsive.css" />
+    <link rel="stylesheet" href="assets/css/darktheme.css" id="cssTheme" />
     <!-- jQuery library -->
     
-    <script src="assets/js/jquery.js"></script>
-    <script src="assets/js/angular.min.js"></script>    
-    <script src="assets/js/angular-route.js"></script>
+    <script src="assets/js/library/jquery.js"></script>
+    <script src="assets/js/library/angular.min.js"></script>    
+    <script src="assets/js/library/angular-route.js"></script>
   </head>
-  <body>
-    <div class="container" ng-app="myApp">
+  <body class="darktheme1">
+
+    <div class="container containerCustom" ng-app="myApp">
       <div ng-view>
           
       </div>
     </div>
+
     <!-- <script src="assets/js/jquery-ui.js"></script> -->
     <!-- Popper JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+
     <!-- Latest compiled JavaScript -->
-    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/library/bootstrap.min.js"></script>
     <!-- <script src="assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
     <script src="assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     
     <!-- model -->
-    <script src="assets/js/myApp.js"></script>
+    <script src="assets/model/myApp.js"></script>
 
     <!-- controllers -->
-    <script src="assets/js/welcomeController.js"></script>
-    <script src="assets/js/globalController.js"></script>
-    <script src="assets/js/amazonController.js"></script>
+    <script src="assets/components/amazon/controllers/controller.js"></script>
 
+    <!-- custom js -->
     <script src="assets/js/custom.js"></script>
-
     
   </body>
 </html>
