@@ -763,7 +763,7 @@ function newProfit() {
  */
 
 function newSellingPrice(){
-    debugger;
+   // debugger;
   console.log("inside new selling price");
   var oldProfit=profit;
   var desiredProfit=$("#total_profit2").val();
@@ -781,25 +781,182 @@ function newSellingPrice(){
 
   function calculateNewSelling(oldProfit,desiredProfit,shippingPrice,bp,rf,sellingPrice){
     var sellingPrice=++sellingPrice;
-    var ref=rf;
+    var ref= parseInt(rf);
     
+    console.log(newRF(sellingPrice,ref));
+    console.log(newFixclosing(sellingPrice));
+    console.log(newPicknpack(sellingPrice));
 
-    var newRF=function (sellingPrice,ref){
-        var a=sellingPrice;
-        var b=ref;
+    //debugger;
+}
 
-        console.log(a);
-        console.log(b);
+
+   function newPicknpack(sellingPrice) {
+    var pickprice = 0;
+
+    var sp = sellingPrice;
+    radioValueshippingtype = $("input[name='shippingType']:checked").val();
+
+
+    if (radioValueshippingtype == 'easyShip' || radioValueshippingtype == 'selfShip') {
+      return pickprice;
+    }
+
+    else {
+
+    if (sp <= 1000) {
+        var pickprice = 10;
+        return pickprice;
+        // break;
+        
+    } else if (sp >= 1001 && sp <= 4999) {
+        var pickprice = 15;
+        return pickprice;
+        // break;
+        
+    } else if (sp >= 5000 && sp <= 11999) {
+        var pickprice = 25;
+        return pickprice;
+        // break;
+        
+    } else {
+        var pickprice = 50;
+        return pickprice;
+        // break;        
+    }
+}
+}
+
+    function newRF (sellingPrice,ref){
+        //debugger;
+        let a=sellingPrice;
+        let b=ref;
+
+        // console.log(a);
+        // console.log(b);
         var newReferal=0;
         
         newReferal = ((b / 100)*a);
-        console.log(newReferal);
+       // console.log(newReferal);
         return newReferal;
-         
+        //debugger;
     }
-     console.log(newRF());
-    debugger;
+
+   
+    function newFixclosing(sellingPrice) {
+   
+    //defining variables
+    var currentSelectedCategory, radioValueshippingtype, selectedCategoryFlag = false, selectedCategory, 
+    otherCategory, productCategory, sellingPrice, from, to, a, x;
+
+    //getting value of shippingType radio button eg.fba or easy ship   
+    radioValueshippingtype = $("input[name='shippingType']:checked").val();
+    sellingPrice = sellingPrice;
+
+    console.log("shipping Type : " + radioValueshippingtype);
+
+    if (radioValueshippingtype == 'easyShip' || radioValueshippingtype == 'selfShip') {
+         //debugger;
+           // console.log(response);
+            a = easyshipFixClosingValue.results;
+            for (i = 0; i < a.length; i++) {
+             var toreturn=0;         
+
+                if (sellingPrice >= a[i].from && sellingPrice <= a[i].to) {
+                   // $('#fixClosingAmount').val(a[i].price);
+                   toreturn=a[i].price;
+                  // console.log(toreturn);
+                    //console.log("New fix_clogin : " + a[i].price);                     
+                    return toreturn;
+                    //break;
+                }
+            }        
+       //debugger;
+    }
+    else {
+
+        // debugger;
+        //referalFeesBtnHandler();
+
+        
+           //  debugger;
+            // console.log(result);
+            a = fbxFixclosingValue.results;
+
+            //loop on retrived data for local processing
+            for (i = 0; i < a.length; i++) {
+
+                //in some cases "to" limit is eg. 1000 and above 
+                //means onward 1000rs fix closing will remain same
+                //hence in this situation we make to value more than selling price
+                //to bypass if logic written few lines below.
+                if (a[i].to === "above") {
+                    to = sellingPrice + 1;
+                } else {
+                    to = a[i].to;
+                }
+
+                from = a[i].from;
+                otherCategory = a[i].otherCategory;
+                selectedCategory = a[i].selectedCategory;
+
+                //if sellingPrice is between from and two then set fix closing value 
+                //accordingly 
+                if (sellingPrice >= from && sellingPrice <= to) {
+
+                    //get current product category
+                    productCategory = localStorage.getItem("productCategory");
+
+                    // debugger;
+
+                    //check this product is under selected cateogry or other category
+                    if (stringEmptyChecker(productCategory)) {
+                        for (currentSelectedCategory in fbxFixclosingValue.selectedCategories) {
+                            //if prduct category is match with any selected category 
+                            //then set fixClosingAmoutn of selected category 
+                            //otherwise set to other category amount
+                            if ($.trim(fbxFixclosingValue.selectedCategories[currentSelectedCategory].toLowerCase()) == productCategory) {
+                               // $('#fixClosingAmount').val(selectedCategory);
+                               // console.log('selectedCategory : ' + selectedCategory);
+                                //if current product is under selcted category then
+                                //make this below flag true otherwise default is false 
+                                //and exit the loop 
+                                selectedCategoryFlag = true;
+                                return selectedCategory;
+                                break;
+                            }
+                        }
+
+                        //if selectedCategoryFlag is false then product is under other category
+                        //and set value of fixClosingAmount to other category value or price
+                        if (!selectedCategoryFlag) {
+                           // $('#fixClosingAmount').val(otherCategory);
+                           // console.log('otherCategory : ' + otherCategory);
+                            return selectedCategory;
+                        }
+
+                    } else {
+                        //for current just showing alert will develope this letter
+
+                       // console.log('Please select Product Categroy isko dekhna haii')
+                        alert("Please select Product Categroy");
+                    }
+
+                    //checking whether user product is in selected category
+                    //or other category because both having different 
+                    //amount of fix closing
+                    break;
+                }
+
+            }
+           // debugger;
+       
+
+    }
+
+   // return toreturn;
 }
+
 
 }
 
