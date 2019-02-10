@@ -1,0 +1,20 @@
+.darktheme .calculator{
+    background:rgba(33, 37, 41, 0.93);
+}
+.darktheme .mainForm .row,
+.darktheme .mainForm [class*=col-]{
+    color: #dee2e6;
+}
+.darktheme input{
+    color: white;
+}
+.darktheme #menu, 
+.darktheme .modalDropdown{
+	background:rgba(33, 37, 41, 0.98);
+}
+.darktheme .modal_modified{
+	background:rgba(33, 37, 41, 0.98);
+}
+.darktheme .deductions{
+	background:rgba(33, 37, 41, 1);
+}
