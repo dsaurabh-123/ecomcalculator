@@ -771,33 +771,42 @@ function newSellingPrice(){
   var shippingPrice=$("#shippingCharges").val();
   var bp = $("#buyingPrice").val();
   var rf = $("#referralFees").val();
-  var expectedit=calculateNewSelling(oldProfit,desiredProfit,shippingPrice,bp,rf,sellingPrice);
-  //calculatedesiredprofit(oldProfit,desiredProfit);
+ // var expectedit=calculateNewSelling(oldProfit,desiredProfit,shippingPrice,bp,rf,sellingPrice);
+  calculatedesiredprofit(oldProfit,desiredProfit,shippingPrice,bp,rf,sellingPrice);
   console.log('Ols profit is '+oldProfit);
   console.log('desired profit is '+desiredProfit);
-  console.log(sellingPrice);
-  console.log(shippingPrice);
-  console.log(expectedit);
+  //console.log('new selling roice is now '+sellingPrice);
+  console.log('shippping is '+shippingPrice);
+  //console.log('the profit on selling p by increasing +1 is '+expectedit);
 
-  function calculatedesiredprofit(oldProfit,desiredProfit){
+
+  function calculatedesiredprofit(oldProfit,desiredProfit,shippingPrice,bp,rf){
     var start=parseInt(oldProfit);
     var limit=parseInt(desiredProfit);
-    debugger;
-      for(var i = start;i<=limit; i++){
-        debugger;
-    calculateNewSelling(oldProfit,desiredProfit,shippingPrice,bp,rf,sellingPrice);
+    var newlimit=limit+25;
+    var i=0;
 
-    debugger;
-    if(i==limit){
-        debugger;
-        console.log('got it');
-    }
+   // debugger;
+    for(var i=start;i<=newlimit;i++){
+       // debugger;
+        calculatethedesired(oldProfit,desiredProfit,shippingPrice,bp,rf);
+      }
+   // debugger;
+  }
 
-    else{
-        console.log("Nooo");
-    }  
-}
 
+      function calculatethedesired(oldProfit,desiredProfit,shippingPrice,bp,rf){
+               sellingPrice=++sellingPrice;   
+               var newsell=calculateNewSelling(oldProfit,desiredProfit,shippingPrice,bp,rf,sellingPrice);
+               console.log(desiredProfit);
+               console.log(parseInt(newsell));
+               if(parseInt(newsell)== desiredProfit){
+                console.log(sellingPrice);
+                $("#sellingPrice1").val(sellingPrice+1);
+                exit(); 
+               }
+               console.log(sellingPrice);
+    };
 
 
   function calculateNewSelling(oldProfit,desiredProfit,shippingPrice,bp,rf,sellingPrice){
@@ -809,8 +818,7 @@ function newSellingPrice(){
     var tax=newtax(picknpack,rf,fixclosing);
     var amazonFee=newamazonfee(picknpack,rf,fixclosing,tax);
     var totaldeduction = newtotaldeduction(shippingPrice,amazonFee,bp);
-    var profit= newprofit(sellingPrice,totaldeduction);
-    
+    var profit= newprofit(sellingPrice,totaldeduction);    
     console.log('New selling price is '+sellingPrice); 
     console.log('referal amount is '+rf);
     console.log('fixclosing amount is '+fixclosing);
@@ -819,7 +827,6 @@ function newSellingPrice(){
     console.log('amazon amount is '+amazonFee);
     console.log('total deducted amount is '+totaldeduction);
     console.log('New profit is '+profit);
-
     return profit;
     //debugger;
 }   
@@ -985,235 +992,13 @@ function newSellingPrice(){
                 }
 
             }
-           // debugger;
-       
+           // debugger;     
 
     }
 }
 }
 
     
-  }
-
-    
-  
-
-function desir_profit() {
-    console.log("inside new desir_profit");
-    var bp = $("#buyingPrice").val();
-    var new_sp = $("#sellingPrice1").val();
-    var rf = $("#referralFees").val();
-    var new_rf = (rf / 100) * new_sp;
-    var new_tx = (18 / 100) * new_sp;
-    var d_profit = $("#total_profit1").val();
-    var old_profit = $("#total_profit").val();
-    var n_shipping = new_shipp(new_sp);
-    var new_pickpack = 0;
-    var oldShipping = $("#shippingCharges1").val();
-    $("#shippingCharges1").val('-' + n_shipping);
-
-    // debugger;
-    function new_fix() {
-        var ship_type = $("input[name='shippingType']:checked").val();
-        console.log(ship_type);
-        var xyz = 0;
-
-        // debugger;
-        if (ship_type == "fba") {
-            // debugger;
-            var sellingPrice = parseFloat($("#sellingPrice1").val());
-            var to, from;
-            //console.log(fbxFixclosingValue);
-
-            var a = fbxFixclosingValue.results;
-            // console.log(a);
-            for (i = 0; i < a.length; i++) {
-                if (a[i].to === "above") {
-                    to = sellingPrice + 1;
-                } else {
-                    to = a[i].to;
-                }
-                from = a[i].from;
-                otherCategory = a[i].otherCategory;
-                selectedCategory = a[i].selectedCategory;
-                if (sellingPrice >= from && sellingPrice <= to) {
-                    $('#fixclosingCharges1').val('-' + otherCategory);
-                    return otherCategory;
-                    break;
-                }
-            }
-
-        } else {
-            // debugger;
-            var sellingPrice = parseFloat($("#sellingPrice1").val());
-            var to, from;
-
-            var a = easyshipFixClosingValue.results;
-            // console.log(a);
-            for (i = 0; i < a.length; i++) {
-
-                if (sellingPrice >= a[i].from && sellingPrice <= a[i].to) {
-                    console.log('hyy');
-                    var x = a[i].price;
-                    $('#fixclosingCharges1').val('-' + x);
-                    console.log(x);
-                    return x;
-                    break;
-                }
-            }
-
-            // debugger;
-        }
-
-    }
-
-    var n_fixclosing = new_fix();
-
-    console.log(n_fixclosing);
-    console.log(n_shipping);
-
-    //debugger ;
-    function new_shipp(new_sp) {
-        //console.log(abc);
-        var sp = new_sp;
-        var new_shipping = 0;
-        var shippingRange = $("input[name='shippingRange']:checked").val();
-        console.log(sp);
-        console.log(shippingRange);
-
-        var ship_type = $("input[name='shippingType']:checked").val();
-        console.log(ship_type);
-
-        if (ship_type == "easyShip") {
-
-            var len = abc.results.length;
-            console.log(len);
-
-            for (var i = 0; i < len; i++) {
-                if (sp >= abc.results[i].from && sp <= abc.results[i].to) {
-                    //debugger ;
-                    if (shippingRange == "local") {
-                        new_shipping = abc.results[i].local;
-                        console.log(new_shipping);
-                        return new_shipping;
-
-                    } else if (shippingRange == "regional") {
-                        new_shipping = abc.results[i].regional;
-                        return new_shipping;
-
-                    } else {
-                        new_shipping = abc.results[i].national;
-                        return new_shipping;
-                    }
-                }
-            }
-        }
-        else if (ship_type == "fba") {
-            var len = fbashippingValue.results.length;
-            console.log(fbashippingValue);
-            console.log(len);
-            for (var i = 0; i < len; i++) {
-                if (sp >= fbashippingValue.results[i].from && sp <= fbashippingValue.results[i].to) {
-                    //debugger ;
-                    if (shippingRange == "local") {
-                        new_shipping = fbashippingValue.results[i].local;
-                        console.log(new_shipping);
-                        return new_shipping;
-
-                    } else if (shippingRange == "regional") {
-                        new_shipping = fbashippingValue.results[i].regional;
-                        return new_shipping;
-
-                    } else {
-                        new_shipping = fbashippingValue.results[i].national;
-                        return new_shipping;
-                    }
-                }
-            }
-
-            //return 50;
-        }
-        else {
-            var oldShipping = $("#shippingCharges").val();
-            new_shipping = oldShipping
-            return new_shipping;
-        }
-
-    }
-
-    //function to call new Pick and pack value call it only if FBA is selected ........................
-    var ship_type = $("input[name='shippingType']:checked").val();
-    console.log(ship_type);
-    if (ship_type == "fba") {
-        function new_pick_n_pack() {
-            var pickprice = 0;
-            var sp = $("#sellingPrice1").val();
-            if (sp <= 1000) {
-                var pickprice = 10;
-                return pickprice;
-            } else if (sp >= 1001 && sp <= 4999) {
-                var pickprice = 15;
-                return pickprice;
-            } else if (sp >= 5000 && sp <= 11999) {
-                var pickprice = 25;
-                return pickprice;
-            } else {
-                var pickprice = 50;
-                return pickprice;
-            }
-        }
-
-        var new_pickpack = new_pick_n_pack();
-        console.log(new_pickpack);
-    }
-
-    function calculateNewValues() {
-        var newProfit = 0;
-        var newTotaldeduction = 0;
-        console.log("Buying Price= " + bp);
-        console.log("Selling Price= " + new_sp);
-
-        var totalAmazonAmount = parseInt(new_rf) + parseInt(n_fixclosing) + parseInt(new_pickpack);
-        var new_tx = (18 / 100) * totalAmazonAmount;
-
-        console.log("New Tax= " + new_tx);
-        console.log("New Shipping charge= " + n_shipping);
-        console.log("New Fix closing= " + n_fixclosing);
-        console.log("New Referal= " + new_rf);
-        console.log("New Pick and pack= " + new_pickpack);
-        var newAmazonFee = parseInt(new_tx) + parseInt(new_rf) + parseInt(n_fixclosing) + parseInt(new_pickpack);
-        console.log("New amazon fee = " + newAmazonFee);
-        newTotaldeduction = parseInt(newAmazonFee) + parseInt(bp) + parseInt(n_shipping);
-        console.log("Total deductions " + newTotaldeduction);
-        newProfit = new_sp - bp - newAmazonFee - n_shipping;
-
-        if (newProfit < 0) {
-
-            $("#profiBtn, #total_profit").css("background", "#db3951");
-            $(".profit_class").css("background", "#db3951");
-
-        } else {
-            console.log('hyy');
-            // $("#profiBtn, #total_profit").css("background", "#53d397");
-            $(".profit_class").css("background", "#7ac37a");
-        }
-
-        console.log("Total Profit " + newProfit);
-
-        $("#amazon_feees1").val('-' + newAmazonFee.toFixed(2));
-        $("#referalCharges1").val('-' + new_rf.toFixed(2));
-        $("#fixclosingCharges1").val('-' + n_fixclosing.toFixed(2));
-        $("#gst").val('-' + new_tx.toFixed(2));
-        $("#picknpack_charge").val('-' + new_pickpack.toFixed(2));
-        $("#total_deductions1").val('-' + newTotaldeduction.toFixed(2));
-        $("#total_profit2").val(newProfit.toFixed(2));
-        $("#total_profit1").val(newProfit.toFixed(2));
-
-    }
-
-    calculateNewValues();
-
-}
 
 /**
  * @name : Ecom Calculator
