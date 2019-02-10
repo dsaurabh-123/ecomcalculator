@@ -740,7 +740,7 @@ function PicknPack() {
 /**
  * @name : Ecom Calculator
  * @author : saurabh dubey
- * @Description : This function will focus profit to take new profit..... working on this  
+ * @Description : This function will focus profit to take new profit.......................................
  */
 
 //defining a var to set the old prift .....
@@ -768,78 +768,114 @@ function newSellingPrice(){
   var oldProfit=profit;
   var desiredProfit=$("#total_profit2").val();
   var sellingPrice = $("#sellingPrice1").val();
-  var shippingPrice=$("#shippingCharges1").val();
+  var shippingPrice=$("#shippingCharges").val();
   var bp = $("#buyingPrice").val();
   var rf = $("#referralFees").val();
-  console.log(oldProfit);
-  console.log(desiredProfit);
+  var expectedit=calculateNewSelling(oldProfit,desiredProfit,shippingPrice,bp,rf,sellingPrice);
+  //calculatedesiredprofit(oldProfit,desiredProfit);
+  console.log('Ols profit is '+oldProfit);
+  console.log('desired profit is '+desiredProfit);
   console.log(sellingPrice);
   console.log(shippingPrice);
+  console.log(expectedit);
 
-  calculateNewSelling(oldProfit,desiredProfit,shippingPrice,bp,rf,sellingPrice);
+  function calculatedesiredprofit(oldProfit,desiredProfit){
+    var start=parseInt(oldProfit);
+    var limit=parseInt(desiredProfit);
+    debugger;
+      for(var i = start;i<=limit; i++){
+        debugger;
+    calculateNewSelling(oldProfit,desiredProfit,shippingPrice,bp,rf,sellingPrice);
+
+    debugger;
+    if(i==limit){
+        debugger;
+        console.log('got it');
+    }
+
+    else{
+        console.log("Nooo");
+    }  
+}
+
 
 
   function calculateNewSelling(oldProfit,desiredProfit,shippingPrice,bp,rf,sellingPrice){
     var sellingPrice=++sellingPrice;
-    var ref= parseInt(rf);
+    var ref= parseInt(rf); 
+    var picknpack= newPicknpack(sellingPrice);
+    var rf=newRF(sellingPrice,ref);
+    var fixclosing=newFixclosing(sellingPrice);
+    var tax=newtax(picknpack,rf,fixclosing);
+    var amazonFee=newamazonfee(picknpack,rf,fixclosing,tax);
+    var totaldeduction = newtotaldeduction(shippingPrice,amazonFee,bp);
+    var profit= newprofit(sellingPrice,totaldeduction);
     
-    console.log(newRF(sellingPrice,ref));
-    console.log(newFixclosing(sellingPrice));
-    console.log(newPicknpack(sellingPrice));
+    console.log('New selling price is '+sellingPrice); 
+    console.log('referal amount is '+rf);
+    console.log('fixclosing amount is '+fixclosing);
+    console.log('pick pack amount is '+picknpack);
+    console.log('tax amount is '+tax);
+    console.log('amazon amount is '+amazonFee);
+    console.log('total deducted amount is '+totaldeduction);
+    console.log('New profit is '+profit);
 
+    return profit;
     //debugger;
-}
+}   
 
+    function newtotaldeduction(shippingPrice,amazonFee,bp){
+        var totaldeductionamount=parseFloat(shippingPrice)+parseFloat(amazonFee)+parseFloat(bp);
+        return totaldeductionamount;
+    }
+
+    function newprofit(sellingPrice,totaldeduction){
+        var profit=parseFloat(sellingPrice)-parseFloat(totaldeduction);
+        return profit;
+    }
+
+    function newamazonfee(picknpack,rf,fixclosing,tax){
+       var amazonfee= parseFloat(picknpack)+parseFloat(rf)+parseFloat(fixclosing)+parseFloat(tax);
+       //console.log(amazonfee);
+       return amazonfee;
+    }
+
+    function newtax(picknpack,rf,fixclosing){
+        var amount=parseInt(picknpack)+parseInt(rf)+parseInt(fixclosing);
+        return ((18/100)*amount);
+    }
 
    function newPicknpack(sellingPrice) {
     var pickprice = 0;
-
     var sp = sellingPrice;
     radioValueshippingtype = $("input[name='shippingType']:checked").val();
-
-
-    if (radioValueshippingtype == 'easyShip' || radioValueshippingtype == 'selfShip') {
-      return pickprice;
+            if (radioValueshippingtype == 'easyShip' || radioValueshippingtype == 'selfShip') {
+              return pickprice;
+            }
+            else {
+            if (sp <= 1000) {
+                 pickprice = 10;
+                return pickprice;              
+            } else if (sp >= 1001 && sp <= 4999) {
+                 pickprice = 15;
+                return pickprice;              
+            } else if (sp >= 5000 && sp <= 11999) {
+                 pickprice = 25;
+                return pickprice;              
+            } else {
+                 pickprice = 50;
+                return pickprice;             
+            }
     }
-
-    else {
-
-    if (sp <= 1000) {
-        var pickprice = 10;
-        return pickprice;
-        // break;
-        
-    } else if (sp >= 1001 && sp <= 4999) {
-        var pickprice = 15;
-        return pickprice;
-        // break;
-        
-    } else if (sp >= 5000 && sp <= 11999) {
-        var pickprice = 25;
-        return pickprice;
-        // break;
-        
-    } else {
-        var pickprice = 50;
-        return pickprice;
-        // break;        
-    }
-}
 }
 
     function newRF (sellingPrice,ref){
-        //debugger;
         let a=sellingPrice;
         let b=ref;
-
-        // console.log(a);
-        // console.log(b);
-        var newReferal=0;
-        
+        var newReferal=0;        
         newReferal = ((b / 100)*a);
        // console.log(newReferal);
         return newReferal;
-        //debugger;
     }
 
    
@@ -953,116 +989,14 @@ function newSellingPrice(){
        
 
     }
-
-   // return toreturn;
+}
 }
 
+    
+  }
 
-}
-
-
-
-// function newSP(sellingPrice){
-
-//     sellingPrice++;
-
-//     console.log(sellingPrice);
-//     var rf = $("#referralFees").val();
-//     var newReferal = (rf / 100) * sellingPrice;
-//     console.log(newReferal);
-
-//     var n_fixclosing = new_fix();
-//     //console.log(n_fixclosing);
-
-
-//      function new_fix() {
-//         var ship_type = $("input[name='shippingType']:checked").val();
-//         console.log(ship_type);
-//         var xyz = 0;
-
-//         // debugger;
-//         if (ship_type == "fba") {
-//              debugger;
-//            // var sellingPrice = parseFloat($("sellingPrice").val());
-//             var to, from;
-//             //console.log(fbxFixclosingValue);
-
-//             var a = fbxFixclosingValue.results;
-//             // console.log(a);
-//             for (i = 0; i < a.length; i++) {
-//                 if (a[i].to === "above") {
-//                     to = sellingPrice + 1;
-//                 } else {
-//                     to = a[i].to;
-//                 }
-//                 from = a[i].from;
-//                 otherCategory = a[i].otherCategory;
-//                 selectedCategory = a[i].selectedCategory;
-//                 if (sellingPrice >= from && sellingPrice <= to) {
-//                     $('#fixclosingCharges1').val('-' + otherCategory);
-//                     return otherCategory;
-//                     break;
-//                 }
-//             }
-
-//         } else {
-//             // debugger;
-//            // var sellingPrice = parseFloat($("#newsp").val());
-//             var to, from;
-
-//             var a = easyshipFixClosingValue.results;
-//             // console.log(a);
-//             for (i = 0; i < a.length; i++) {
-
-//                 if (sellingPrice >= a[i].from && sellingPrice <= a[i].to) {
-//                     console.log('hyy');
-//                     var x = a[i].price;
-//                     $('#fixclosingCharges1').val('-' + x);
-//                     console.log(x);
-//                     return x;
-//                     break;
-//                 }
-//             }
-
-//             // debugger;
-//         }
-
-//     }
-//     //console.log(newsp);
-
-
-//     // //function to call new Pick and pack value call it only if FBA is selected ........................
-//     // var ship_type = $("input[name='shippingType']:checked").val();
-//     // console.log(ship_type);
-//     // if (ship_type == "fba") {
-
-
-//     //     function new_pick_n_pack() {
-//     //         var pickprice = 0;
-//     //         var sp = sellingPrice;
-//     //         if (sp <= 1000) {
-//     //             var pickprice = 10;
-//     //             return pickprice;
-//     //         } else if (sp >= 1001 && sp <= 4999) {
-//     //             var pickprice = 15;
-//     //             return pickprice;
-//     //         } else if (sp >= 5000 && sp <= 11999) {
-//     //             var pickprice = 25;
-//     //             return pickprice;
-//     //         } else {
-//     //             var pickprice = 50;
-//     //             return pickprice;
-//     //         }
-//     //     }
-
-//     //     var new_pickpack = new_pick_n_pack();
-//     //     console.log(new_pickpack);
-//     // }
-
-
-// return  parseInt(n_fixclosing)+parseInt(newReferal);
-// }
-
+    
+  
 
 function desir_profit() {
     console.log("inside new desir_profit");
